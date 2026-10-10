@@ -28,8 +28,8 @@ footer{display:flex;justify-content:space-between;align-items:center;gap:14px;bo
   <h1 class="headline">Останься<br>в своём<br><span>настроении.</span></h1>
   <p class="intro">Музыка для дороги, тихого вечера, больших мыслей и моментов, когда слова не нужны. Просто включи — и побудь здесь.</p>
   <div class="player" aria-label="Музыкальный плеер">
-    <div class="trackrow"><div class="cover" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M9 18V5l11-2v13M9 18c0 1.1-1.3 2-3 2s-3-.9-3-2 1.3-2 3-2 3 .9 3 2Zm11-2c0 1.1-1.3 2-3 2s-3-.9-3-2 1.3-2 3-2 3 .9 3 2Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg></div><div class="trackmeta"><div class="tracktitle" id="trackTitle">Твоя музыка — впереди</div><div class="tracksub" id="trackSub">Настроение FM · тестовый режим</div></div><div class="wave" aria-hidden="true"><i style="--h:8px"></i><i style="--h:16px"></i><i style="--h:11px"></i><i style="--h:22px"></i><i style="--h:13px"></i><i style="--h:18px"></i><i style="--h:7px"></i></div></div>
-    <div class="controls"><button class="play" id="playBtn" aria-label="Проверить плеер" title="Проверить плеер"><svg id="playIcon" width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l10-6.5z"/></svg></button><div class="status" id="status" aria-live="polite">Станция готовится к первому эфиру.<br>Аудиопоток подключим следующим этапом.</div><label aria-label="Громкость"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M11 5 6 9H3v6h3l5 4zM15.5 8.5a5 5 0 0 1 0 7M18 5a9 9 0 0 1 0 14" stroke-linecap="round" stroke-linejoin="round"/></svg></label><input class="vol" id="volume" type="range" min="0" max="1" step=".01" value=".75" aria-label="Громкость" disabled></div>
+    <div class="trackrow"><div class="cover" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M9 18V5l11-2v13M9 18c0 1.1-1.3 2-3 2s-3-.9-3-2 1.3-2 3-2 3 .9 3 2Zm11-2c0 1.1-1.3 2-3 2s-3-.9-3-2 1.3-2 3-2 3 .9 3 2Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg></div><div class="trackmeta"><div class="tracktitle" id="trackTitle">Атмосферный эфир</div><div class="tracksub" id="trackSub">Бесплатный звук · генерация в браузере</div></div><div class="wave" aria-hidden="true"><i style="--h:8px"></i><i style="--h:16px"></i><i style="--h:11px"></i><i style="--h:22px"></i><i style="--h:13px"></i><i style="--h:18px"></i><i style="--h:7px"></i></div></div>
+    <div class="controls"><button class="play" id="playBtn" aria-label="Включить атмосферный эфир" title="Включить атмосферный эфир"><svg id="playIcon" width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l10-6.5z"/></svg></button><div class="status" id="status" aria-live="polite">Бесплатный атмосферный звук без внешнего сервера.<br>Нажми Play, чтобы включить.</div><label aria-label="Громкость"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M11 5 6 9H3v6h3l5 4zM15.5 8.5a5 5 0 0 1 0 7M18 5a9 9 0 0 1 0 14" stroke-linecap="round" stroke-linejoin="round"/></svg></label><input class="vol" id="volume" type="range" min="0" max="1" step=".01" value=".35" aria-label="Громкость"></div>
   </div>
 </section>
 <section class="rightcol">
@@ -48,16 +48,40 @@ footer{display:flex;justify-content:space-between;align-items:center;gap:14px;bo
 <div class="toast" id="toast" role="status"></div>
 <script>
 const moods={
- morning:{title:"Лёгкое утро",sub:"Мягкий старт · настроение",quote:"«Не обязательно спешить, чтобы двигаться вперёд.»",label:"МЕДЛЕННОЕ УТРО"},
- flow:{title:"В своём потоке",sub:"Фокус · движение · ритм",quote:"«Оставь лишнее за пределами этой минуты.»",label:"СВОЙ РИТМ"},
- evening:{title:"Тёплый вечер",sub:"Выдохнуть · замедлиться",quote:"«Пусть сегодняшний день останется там, где ему место.»",label:"ВЕЧЕР БЕЗ СПЕШКИ"},
- night:{title:"После полуночи",sub:"Ночь · город · мысли",quote:"«Некоторые вещи понятнее в тишине.»",label:"НОЧНАЯ ЧАСТОТА"}
+ morning:{title:"Лёгкое утро",sub:"Светлый синтезаторный эмбиент",notes:[261.63,329.63,392,493.88,523.25],quote:"«Не обязательно спешить, чтобы двигаться вперёд.»",label:"МЕДЛЕННОЕ УТРО"},
+ flow:{title:"В своём потоке",sub:"Мягкий ритм · фокус",notes:[220,261.63,329.63,392,440],quote:"«Оставь лишнее за пределами этой минуты.»",label:"СВОЙ РИТМ"},
+ evening:{title:"Тёплый вечер",sub:"Тёплый, медленный эмбиент",notes:[196,246.94,293.66,369.99,392],quote:"«Пусть сегодняшний день останется там, где ему место.»",label:"ВЕЧЕР БЕЗ СПЕШКИ"},
+ night:{title:"После полуночи",sub:"Глубокие ночные тона",notes:[164.81,196,246.94,293.66,329.63],quote:"«Некоторые вещи понятнее в тишине.»",label:"НОЧНАЯ ЧАСТОТА"}
 };
-const buttons=[...document.querySelectorAll(".mood")];let active="flow";let toastTimer;
+const buttons=[...document.querySelectorAll(".mood")];let active="flow";let toastTimer;let audioCtx=null;let master=null;let playing=false;let sequenceTimer=null;let noteIndex=0;let activeVoices=[];
 function showToast(message){const el=document.getElementById("toast");el.textContent=message;el.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove("show"),3000)}
-buttons.forEach(button=>button.addEventListener("click",()=>{active=button.dataset.mood;buttons.forEach(b=>b.setAttribute("aria-pressed",String(b===button)));const m=moods[active];document.getElementById("trackTitle").textContent=m.title;document.getElementById("trackSub").textContent="Настроение FM · подборка готовится";document.getElementById("quote").firstChild.textContent=m.quote;document.getElementById("quoteLabel").textContent=m.label;showToast("Настроение изменено. Музыкальные подборки подключим после настройки эфира.")}));
-document.getElementById("playBtn").addEventListener("click",()=>showToast("Это стартовая версия интерфейса. Настоящий аудиопоток подключим следующим этапом."));
-document.getElementById("aboutLink").addEventListener("click",e=>{e.preventDefault();showToast("Настроение FM — независимый проект о музыке и состояниях.")});
+function makeTone(freq,when,duration,volume){
+  if(!audioCtx||!master)return;
+  const osc=audioCtx.createOscillator();const gain=audioCtx.createGain();const filter=audioCtx.createBiquadFilter();
+  osc.type="sine";osc.frequency.setValueAtTime(freq,when);
+  filter.type="lowpass";filter.frequency.setValueAtTime(900,when);
+  gain.gain.setValueAtTime(0.0001,when);gain.gain.exponentialRampToValueAtTime(volume,when+0.8);gain.gain.setValueAtTime(volume,when+duration-1.2);gain.gain.exponentialRampToValueAtTime(0.0001,when+duration);
+  osc.connect(filter);filter.connect(gain);gain.connect(master);osc.start(when);osc.stop(when+duration+0.05);
+}
+function playPhrase(){
+  if(!playing||!audioCtx)return;
+  const m=moods[active];const now=audioCtx.currentTime;const notes=m.notes;
+  makeTone(notes[noteIndex%notes.length],now,4.2,0.12);
+  if(noteIndex%3===0)makeTone(notes[(noteIndex+2)%notes.length]/2,now,5.5,0.08);
+  if(noteIndex%4===0)makeTone(notes[(noteIndex+3)%notes.length]*2,now+0.15,3.6,0.025);
+  noteIndex++;
+}
+function startSound(){
+  const AudioContextClass=window.AudioContext||window.webkitAudioContext;
+  if(!AudioContextClass){showToast("Этот браузер не поддерживает генерацию звука.");return}
+  if(!audioCtx){audioCtx=new AudioContextClass();master=audioCtx.createGain();master.gain.value=Number(document.getElementById("volume").value);master.connect(audioCtx.destination)}
+  audioCtx.resume().then(()=>{if(playing)return;playing=true;noteIndex=0;playPhrase();sequenceTimer=setInterval(playPhrase,3200);document.getElementById("trackTitle").textContent=moods[active].title;document.getElementById("trackSub").textContent="Атмосферный звук · создаётся на устройстве";document.getElementById("status").innerHTML="Эфир включён · бесплатная генерация звука<br>Без внешнего сервера и музыкальных файлов";document.getElementById("playIcon").innerHTML='<path d="M7 5h4v14H7zM15 5h4v14h-4z"/>';document.getElementById("playBtn").setAttribute("aria-label","Остановить эфир");document.getElementById("playBtn").title="Остановить эфир"});
+}
+function stopSound(){playing=false;clearInterval(sequenceTimer);sequenceTimer=null;if(audioCtx)audioCtx.suspend();document.getElementById("status").innerHTML="Эфир остановлен.<br>Нажми Play, чтобы продолжить.";document.getElementById("playIcon").innerHTML='<path d="M8 5.5v13l10-6.5z"/>';document.getElementById("playBtn").setAttribute("aria-label","Включить атмосферный эфир");document.getElementById("playBtn").title="Включить атмосферный эфир"}
+buttons.forEach(button=>button.addEventListener("click",()=>{active=button.dataset.mood;buttons.forEach(b=>b.setAttribute("aria-pressed",String(b===button)));const m=moods[active];document.getElementById("trackTitle").textContent=m.title;document.getElementById("trackSub").textContent=m.sub;document.getElementById("quote").firstChild.textContent=m.quote;document.getElementById("quoteLabel").textContent=m.label;if(playing){noteIndex=0;playPhrase()}showToast("Настроение переключено: "+m.title)}));
+document.getElementById("playBtn").addEventListener("click",()=>playing?stopSound():startSound());
+document.getElementById("volume").addEventListener("input",e=>{if(master)master.gain.setTargetAtTime(Number(e.target.value),audioCtx.currentTime,0.05)});
+document.getElementById("aboutLink").addEventListener("click",e=>{e.preventDefault();showToast("Настроение FM — независимый проект. Сейчас играет синтезированный эмбиент; лицензированную музыку подключим отдельно.")});
 document.getElementById("year").textContent=new Date().getFullYear();
 </script>
 </body>
