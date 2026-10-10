@@ -2,7 +2,11 @@
 <html lang="ru"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0b0b0d"><meta name="description" content="Настроение FM — радио, подобранное под твой момент.">
-<title>Настроение FM — твой звук, твой мир</title><style>
+<title>Настроение FM — твой звук, твой мир</title>
+<link rel="manifest" href="./manifest.webmanifest">
+<meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Настроение FM"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="icon" href="./icon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="./icon.svg">
+<style>
 :root{color-scheme:dark;--bg:#0b0b0d;--panel:#141417;--panel2:#1b1b20;--line:#2a292f;--text:#f7f3f0;--muted:#99969e;--accent:#ff6848;--accent2:#ff9a70}
 *{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}body{letter-spacing:-.025em}button,input{font:inherit}button{cursor:pointer;color:inherit;-webkit-tap-highlight-color:transparent}button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 .app{min-height:100vh;display:grid;grid-template-columns:238px minmax(0,1fr);max-width:1720px;margin:auto}.sidebar{position:sticky;top:0;height:100vh;border-right:1px solid #ffffff0b;padding:30px 19px 22px;display:flex;flex-direction:column;gap:42px;background:#0d0d0f}.brand{display:flex;align-items:center;gap:12px;padding:0 7px}.logo{width:42px;height:42px;border-radius:15px;display:grid;place-items:center;background:#f5eee9;color:#171316}.brandname{font-size:13px;font-weight:850;letter-spacing:.13em}.brandtag{font-size:10px;color:#85818a;margin-top:5px;letter-spacing:.03em}.navlabel{font-size:9px;color:#6f6b74;text-transform:uppercase;letter-spacing:.19em;padding:0 12px;margin-bottom:11px}.nav{display:grid;gap:5px}.navitem{width:100%;display:flex;align-items:center;gap:13px;border:1px solid transparent;background:transparent;border-radius:12px;padding:13px;color:#9f9ba4;text-align:left;font-size:12px;transition:.2s}.navitem svg{opacity:.75}.navitem.active{background:#211b1b;border-color:#382724;color:#fff;font-weight:700}.navitem.active svg{color:var(--accent);opacity:1}.sidebottom{margin-top:auto;padding:19px 15px;border-top:1px solid #ffffff12}.sidebottom .mini-label{font-size:9px;letter-spacing:.16em;color:var(--accent);text-transform:uppercase}.sidebottom strong{display:block;font-size:16px;line-height:1.2;margin-top:12px;font-weight:650;letter-spacing:-.04em}.sidebottom p{font-size:10px;line-height:1.65;color:#89858e;margin:8px 0 0}
@@ -138,6 +142,31 @@ body{padding-bottom:112px}
 @media(max-width:1000px){.moods{grid-template-columns:repeat(3,minmax(0,1fr))}}@media(max-width:700px){.moods{grid-template-columns:repeat(2,minmax(0,1fr))}}
 
 .moment-panel{display:flex;justify-content:space-between;align-items:center;gap:25px;padding:24px;border:1px solid #ffffff10;border-radius:18px;background:radial-gradient(ellipse at 100% 0%,#9e5c4c20,transparent 48%),#141417}.moment-copy{min-width:200px;max-width:360px}.moment-kicker{font-size:9px;letter-spacing:.2em;color:#e99c86;font-weight:750}.moment-title{font-size:22px;font-weight:700;letter-spacing:-.05em;margin-top:10px}.moment-copy p{font-size:11px;color:#99939e;line-height:1.6;margin:8px 0 0}.moment-actions{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap}.moment-chip{height:40px;padding:0 14px;border:1px solid #ffffff14;border-radius:12px;background:#ffffff07;color:#d8d0d8;font-size:11px;white-space:nowrap}.moment-chip:hover,.moment-chip.active{border-color:#e18b7d80;background:#e18b7d15;color:#ffc0ad}.history-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.history-item{min-width:0;display:flex;align-items:center;gap:10px;padding:12px;border:1px solid #ffffff0d;border-radius:13px;background:#151518;text-align:left}.history-item:hover{border-color:#ffffff2a;background:#202025}.history-symbol{width:38px;height:38px;flex-shrink:0;display:grid;place-items:center;border-radius:11px;background:linear-gradient(145deg,#e7a18a,#a54b60);color:white}.history-info{min-width:0}.history-name{display:block;font-size:11px;font-weight:650;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.history-meta{display:block;font-size:9px;color:#8d8791;margin-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.history-empty{grid-column:1/-1;padding:17px;border:1px dashed #363139;border-radius:13px;color:#8f8994;font-size:11px}@media(max-width:1000px){.moment-panel{align-items:flex-start;flex-direction:column}.moment-actions{justify-content:flex-start}.history-list{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:700px){.moment-panel{padding:18px;gap:18px}.moment-title{font-size:20px}.moment-actions{gap:7px}.moment-chip{height:38px;padding:0 11px;font-size:10px}.history-list{grid-template-columns:1fr}.history-item{padding:10px}}
+
+/* Smart moods, sleep timer and visualizer */
+.smart-moods{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin:0 0 18px}
+.smart-mood{min-width:0;display:grid;grid-template-columns:35px 1fr;grid-template-rows:auto auto;align-items:center;column-gap:10px;text-align:left;padding:13px;border:1px solid #ffffff10;border-radius:14px;background:linear-gradient(145deg,#19181d,#121215);transition:.2s}
+.smart-mood>span{grid-row:1/3;width:35px;height:35px;display:grid;place-items:center;border-radius:11px;background:#ffffff09;color:#f4a28b;font-size:19px}
+.smart-mood b{font-size:11px;font-weight:700}.smart-mood small{font-size:9px;color:#928b97;margin-top:4px}
+.smart-mood:hover,.smart-mood.active{border-color:#e18b7d80;background:linear-gradient(145deg,#2b1d20,#171619)}
+.fp-art{position:relative}
+.fp-visualizer{position:absolute;inset:0;width:100%;height:100%;z-index:2;opacity:.78;pointer-events:none}
+.fp-art .fp-note{z-index:3;text-shadow:0 0 28px #ffbea8aa}
+.fp-extra{width:min(100%,370px);margin-top:24px;text-align:left}
+.fp-extra-head{display:flex;justify-content:space-between;gap:12px;color:#8f8792;font-size:9px;letter-spacing:.13em}
+.fp-extra-head span:last-child{color:#eab09f;letter-spacing:0}
+.sleep-options{display:flex;gap:7px;flex-wrap:wrap;margin-top:11px}
+.sleep-options button{padding:9px 11px;border:1px solid #ffffff16;border-radius:10px;background:#ffffff07;color:#d7ced6;font-size:10px}
+.sleep-options button.active,.sleep-options button:hover{border-color:#e18b7d80;background:#e18b7d18;color:#ffc0ad}
+.fp-volume-row{width:min(100%,370px);display:flex;align-items:center;gap:12px;margin-top:17px}
+.fp-volume-row label{font-size:8px;letter-spacing:.14em;color:#8f8792;white-space:nowrap}
+.fp-volume-row input{flex:1;min-width:0;accent-color:#f5b09a}
+.fp-volume-row span{width:34px;text-align:right;font-size:10px;color:#d9cbd3}
+.install-button{border:1px solid #ffffff17;border-radius:10px;padding:9px 12px;background:#ffffff08;color:#dcd3dc;font-size:10px}
+.install-button:hover{border-color:#e18b7d80;color:#ffc0ad}
+@media(max-width:700px){.smart-moods{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}.smart-mood{padding:11px;column-gap:8px}.fp-extra{margin-top:17px}.fp-volume-row{margin-top:13px}.sleep-options{gap:6px}.sleep-options button{padding:8px 9px}}
+@media(max-height:850px){.fp-extra{margin-top:13px}.fp-volume-row{margin-top:11px}.fp-footer{margin-top:16px}}
+
 </style>
 </head><body>
 <div class="app">
@@ -147,7 +176,7 @@ body{padding-bottom:112px}
  <div class="sidebottom"><div class="mini-label">МУЗЫКА В МОМЕНТЕ</div><strong>Найди свою волну.</strong><p>Радиостанции со всего мира — под любое состояние и настроение.</p></div>
 </aside>
 <div class="content">
-<header class="topbar"><div class="crumb">НАСТРОЕНИЕ <span style="color:#514b54">/</span> <b>РАДИО ПО ЖАНРАМ</b></div><div class="topright"><div class="live"><span class="dot"></span><span>ЭФИР ДОСТУПЕН</span></div><div class="profile">FM</div></div></header>
+<header class="topbar"><div class="crumb">НАСТРОЕНИЕ <span style="color:#514b54">/</span> <b>РАДИО ПО ЖАНРАМ</b></div><div class="topright"><div class="live"><span class="dot"></span><span>ЭФИР ДОСТУПЕН</span></div><button class="install-button" id="installApp" type="button" hidden>Установить</button><div class="profile">FM</div></div></header>
 <main>
 <section class="hero"><div class="hero-art"></div><div class="hero-content"><div class="eyebrow">ЗВУК, КОТОРЫЙ ТЕБЕ БЛИЗОК</div><h1 class="headline">Поймай<br>своё <span>настроение.</span></h1><p class="intro">Музыка не должна быть случайной. Выбери атмосферу, включи любимую волну и оставь остальное за кадром.</p><button class="hero-pill" type="button" id="heroChoose"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l10-6.5z"/></svg>Слушать радио</button></div></section>
 <section id="genresSection"><div class="sectionhead"><h2>Выбери атмосферу</h2><span>12 НАСТРОЕНИЙ</span></div><div class="moods">
@@ -164,7 +193,16 @@ body{padding-bottom:112px}
 <button class="mood" data-tag="pop" aria-pressed="false"><span class="moodicon">✳</span><span class="moodname">Pop</span><div class="mooddesc">Знакомые мелодии</div></button>
 <button class="mood" data-tag="world" aria-pressed="false"><span class="moodicon">◎</span><span class="moodname">World</span><div class="mooddesc">Звуки разных культур</div></button>
 </div></section>
-<section class="moment-section" id="momentSection"><div class="sectionhead"><h2>Музыка под твой момент</h2><span>ПОД ТВОЙ РИТМ</span></div><div class="moment-panel"><div class="moment-copy"><div class="moment-kicker">ПОДБОР ПО КОНТЕКСТУ</div><div class="moment-title" id="momentTitle">Как проходит твой день?</div><p id="momentStatus">Выбери сценарий или подбери атмосферу по местной погоде.</p></div><div class="moment-actions"><button class="moment-chip" data-moment="morning">☀ Утро</button><button class="moment-chip" data-moment="focus">◈ Фокус</button><button class="moment-chip" data-moment="sunset">◒ Закат</button><button class="moment-chip" data-moment="night">☾ Ночь</button><button class="moment-chip weather-chip" id="weatherPick">⌁ По погоде</button></div></div></section>
+<section class="moment-section" id="momentSection"><div class="sectionhead"><h2>Музыка под твой момент</h2><span>ПОД ТВОЙ РИТМ</span></div><div class="moment-panel"><div class="moment-copy"><div class="moment-kicker">ПОДБОР ПО КОНТЕКСТУ</div><div class="moment-title" id="momentTitle">Как проходит твой день?</div><p id="momentStatus">Выбери сценарий или подбери атмосферу по местной погоде.</p></div>
+<div class="smart-moods" aria-label="Умный выбор настроения">
+ <button class="smart-mood active" type="button" data-preset="calm"><span>◌</span><b>Спокойствие</b><small>Снять напряжение</small></button>
+ <button class="smart-mood" type="button" data-preset="romantic"><span>♡</span><b>Романтика</b><small>Тёплая атмосфера</small></button>
+ <button class="smart-mood" type="button" data-preset="energy"><span>↗</span><b>Энергия</b><small>Добавить движения</small></button>
+ <button class="smart-mood" type="button" data-preset="melancholy"><span>☾</span><b>Меланхолия</b><small>Побыть наедине</small></button>
+ <button class="smart-mood" type="button" data-preset="focus"><span>⌖</span><b>Фокус</b><small>Работа и концентрация</small></button>
+ <button class="smart-mood" type="button" data-preset="surprise"><span>✦</span><b>Удиви меня</b><small>Случайное настроение</small></button>
+</div>
+<div class="moment-actions"><button class="moment-chip" data-moment="morning">☀ Утро</button><button class="moment-chip" data-moment="focus">◈ Фокус</button><button class="moment-chip" data-moment="sunset">◒ Закат</button><button class="moment-chip" data-moment="night">☾ Ночь</button><button class="moment-chip weather-chip" id="weatherPick">⌁ По погоде</button></div></div></section>
 <section class="player-section" id="radioSection"><div class="sectionhead"><h2>Твоя радиоволна</h2><span id="heroGenre">СЕЙЧАС · CHILLOUT</span></div><div class="player">
 <div class="trackrow"><div class="cover" aria-hidden="true"><svg width="25" height="25" viewBox="0 0 24 24" fill="none"><path d="M9 18V5l11-2v13M9 18c0 1.1-1.3 2-3 2s-3-.9-3-2 1.3-2 3-2 3 .9 3 2Zm11-2c0 1.1-1.3 2-3 2s-3-.9-3-2 1.3-2 3-2 3 .9 3 2Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg></div><div class="trackmeta"><div class="tracktitle" id="trackTitle">Выбери радиостанцию</div><div class="tracksub" id="trackSub">Настоящий эфир · без синтезированных звуков</div></div><div class="wave" aria-hidden="true"><i style="--h:8px"></i><i style="--h:16px"></i><i style="--h:11px"></i><i style="--h:22px"></i><i style="--h:13px"></i><i style="--h:18px"></i><i style="--h:7px"></i></div></div>
 <div class="stationbox" id="stationBox"><div class="stationtop"><div><div class="stationheading">Радиостанции</div><div class="stationhint" id="stationHint">Загружаем каталог интернет-радио…</div></div><button class="refreshstations" id="refreshStations" type="button">Обновить список</button></div><div class="stationtools"><label class="stationsearch"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4 4" stroke-linecap="round"/></svg><input id="stationSearch" type="search" placeholder="Найти радиостанцию…" autocomplete="off" aria-label="Поиск радиостанций"></label><button id="favoritesOnly" class="filterchip" type="button" aria-pressed="false">♡ Избранное</button><button id="surpriseStation" class="filterchip surprise" type="button">✦ Удиви меня</button><button id="similarStations" class="filterchip" type="button">↗ Похожие</button></div><div class="stationlist" id="stationList"><div class="stationloading">Подключаем каталог Radio Browser…</div></div><audio id="streamAudio" preload="none"></audio></div>
@@ -182,7 +220,7 @@ body{padding-bottom:112px}
  <button class="fp-close" id="fpClose" type="button" aria-label="Закрыть плеер"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
  <div class="fp-inner">
   <div class="fp-label">НАСТРОЕНИЕ FM · NOW PLAYING</div>
-  <div class="fp-art" aria-hidden="true"><div class="fp-note">♫</div></div>
+  <div class="fp-art" aria-hidden="true"><div class="fp-note">♫</div><canvas class="fp-visualizer" id="fpVisualizer" aria-hidden="true"></canvas></div>
   <h2 class="fp-title" id="fpTitle">Выбери радиостанцию</h2>
   <div class="fp-subtitle" id="fpSubtitle">Твой звук. Твой мир.</div>
   <div class="fp-live"><span></span><b id="fpLiveText">ГОТОВ К ЭФИРУ</b></div>
@@ -193,6 +231,15 @@ body{padding-bottom:112px}
    <button class="fp-skip" id="fpNext" type="button" aria-label="Следующая станция" title="Следующая станция"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M16 5h2v14h-2zM5 5v14l10-7z"/></svg></button>
   </div>
   <button class="fp-mute" id="fpMute" type="button" aria-label="Выключить звук">◖)) ЗВУК</button>
+
+<div class="fp-extra">
+ <div class="fp-extra-head"><span>ТАЙМЕР СНА</span><span id="sleepTimerStatus">Выключен</span></div>
+ <div class="sleep-options">
+  <button type="button" data-sleep="15">15 мин</button><button type="button" data-sleep="30">30 мин</button><button type="button" data-sleep="45">45 мин</button><button type="button" data-sleep="60">1 час</button><button type="button" data-sleep="off" class="sleep-off">Выкл.</button>
+ </div>
+</div>
+<div class="fp-volume-row"><label for="playerVolume">ГРОМКОСТЬ</label><input id="playerVolume" type="range" min="0" max="100" value="35" aria-label="Громкость радио"><span id="volumeValue">35%</span></div>
+
   <div class="fp-footer">ИНТЕРНЕТ-РАДИО · ЖИВОЙ ЭФИР</div>
  </div>
 </div>
@@ -203,6 +250,7 @@ let currentStation=null;
 let currentTag="chillout";
 let streamPlaying=false;
 let loadToken=0;
+let playRequestToken=0;
 let toastTimer;
 const tagLabels={"chillout":"Chillout","lounge":"Lounge","jazz":"Jazz","ambient":"Ambient","deep house":"Deep House","classical":"Classical","piano":"Piano","electronic":"Electronic","reggae":"Reggae","rock":"Rock","pop":"Pop","world":"World"};
 const favorites=new Set(JSON.parse(localStorage.getItem("moodfm-favorites")||"[]"));
@@ -268,6 +316,7 @@ function renderStations(){
  document.getElementById("stationHint").textContent="Показано: "+filtered.length+" · станция уже выбрана";
 }
 async function playStation(station,item,btn,attempt=0){
+ const playToken=++playRequestToken;
  stopStream();
  currentStation=station;
  document.querySelectorAll(".stationitem").forEach(el=>el.classList.remove("playing"));
@@ -282,9 +331,11 @@ async function playStation(station,item,btn,attempt=0){
    const res=await fetch("https://de1.api.radio-browser.info/json/url/"+encodeURIComponent(station.stationuuid),{signal:AbortSignal.timeout(5000)});
    if(res.ok){const info=await res.json();if(info&&info.url)stream=info.url}
   }catch(e){}
+  if(playToken!==playRequestToken)return;
   if(!stream)throw new Error("No stream URL");
   streamAudio.pause();streamAudio.src=stream;streamAudio.volume=lastAudibleVolume||.35;streamAudio.muted=false;syncMuteButtons();
   await streamAudio.play();
+  if(playToken!==playRequestToken){streamAudio.pause();return}
   saveHistory(station);
   streamPlaying=true;btn.textContent="Играет";
   document.getElementById("status").textContent="В эфире · "+(station.name||"Интернет-радио");
@@ -292,6 +343,7 @@ async function playStation(station,item,btn,attempt=0){
  }catch(e){
   streamPlaying=false;btn.textContent="Повторить";item.classList.remove("playing");
   setPlayIcon(false);
+  if(playToken!==playRequestToken)return;
   if(attempt<2&&allStations.length>1){
    document.getElementById("status").textContent="Поток не ответил. Пробуем другую станцию…";
    const idx=allStations.findIndex(x=>x.stationuuid===station.stationuuid);
@@ -409,6 +461,74 @@ document.getElementById("clearHistory").addEventListener("click",()=>{
 document.getElementById("aboutLink").addEventListener("click",e=>{e.preventDefault();showToast("Настроение FM — подборка независимых интернет-радиостанций по жанрам.")});
 document.getElementById("year").textContent=new Date().getFullYear();
 renderHistory();
+
+/* Smart mood routing: each preset chooses a relevant station genre. */
+const smartPresetTags={calm:["chillout","ambient","lounge"],romantic:["lounge","jazz","piano"],energy:["rock","electronic","deep house","reggae"],melancholy:["ambient","piano","classical"],focus:["ambient","classical","piano"]};
+document.querySelectorAll(".smart-mood[data-preset]").forEach(button=>button.addEventListener("click",()=>{
+ const preset=button.dataset.preset;
+ document.querySelectorAll(".smart-mood").forEach(b=>b.classList.toggle("active",b===button));
+ if(preset==="surprise"){
+  const choices=Object.keys(smartPresetTags);const selected=choices[Math.floor(Math.random()*choices.length)];
+  const tag=smartPresetTags[selected][Math.floor(Math.random()*smartPresetTags[selected].length)];
+  document.getElementById("momentTitle").textContent="Случайное настроение";
+  document.getElementById("momentStatus").textContent="Сегодня это "+selected+". Подобрали жанр "+(tagLabels[tag]||tag)+".";
+  loadStations(tag);
+ }else{
+  const tags=smartPresetTags[preset]||["chillout"];
+  const tag=tags[Math.floor(Math.random()*tags.length)];
+  const labels={calm:"Спокойствие",romantic:"Романтика",energy:"Энергия",melancholy:"Меланхолия",focus:"Фокус"};
+  const notes={calm:"Мягкие текстуры и неторопливый ритм.",romantic:"Тёплый lounge, джаз или фортепиано.",energy:"Больше ритма — от рока до электроники.",melancholy:"Пиано и ambient для тихого вечера.",focus:"Спокойный звук без лишнего отвлечения."};
+  document.getElementById("momentTitle").textContent=labels[preset];
+  document.getElementById("momentStatus").textContent=notes[preset];
+  loadStations(tag);
+ }
+ document.getElementById("radioSection").scrollIntoView({behavior:"smooth",block:"start"});
+}));
+
+/* Sleep timer uses a single cancellable timeout and pauses the live stream. */
+let sleepTimerId=null,sleepEndsAt=0,sleepTicker=null;
+function stopSleepTimer(showMessage=false){
+ if(sleepTimerId)clearTimeout(sleepTimerId);if(sleepTicker)clearInterval(sleepTicker);
+ sleepTimerId=null;sleepTicker=null;sleepEndsAt=0;
+ const status=document.getElementById("sleepTimerStatus");if(status)status.textContent="Выключен";
+ document.querySelectorAll("[data-sleep]").forEach(b=>b.classList.toggle("active",b.dataset.sleep==="off"));
+ if(showMessage)showToast("Таймер сна отключён.");
+}
+function startSleepTimer(minutes){
+ stopSleepTimer();
+ if(!minutes){showToast("Таймер сна отключён.");return}
+ sleepEndsAt=Date.now()+minutes*60000;
+ const status=document.getElementById("sleepTimerStatus");
+ const update=()=>{const left=Math.max(0,Math.ceil((sleepEndsAt-Date.now())/60000));if(status)status.textContent=left+" мин";};
+ update();sleepTicker=setInterval(update,15000);
+ document.querySelectorAll("[data-sleep]").forEach(b=>b.classList.toggle("active",Number(b.dataset.sleep)===minutes));
+ sleepTimerId=setTimeout(()=>{stopSleepTimer();stopStream();streamAudio.removeAttribute("src");streamAudio.load();document.getElementById("status").textContent="Таймер сна остановил радио.";showToast("Таймер сна: радио выключено.");},minutes*60000);
+ showToast("Радио выключится через "+minutes+" мин.");
+}
+document.querySelectorAll("[data-sleep]").forEach(b=>b.addEventListener("click",()=>{if(b.dataset.sleep==="off")stopSleepTimer(true);else startSleepTimer(Number(b.dataset.sleep))}));
+const playerVolume=document.getElementById("playerVolume"),volumeValue=document.getElementById("volumeValue");
+if(playerVolume){playerVolume.value=Math.round(streamAudio.volume*100);if(volumeValue)volumeValue.textContent=playerVolume.value+"%";playerVolume.addEventListener("input",()=>{const v=Number(playerVolume.value)/100;streamAudio.volume=v;streamAudio.muted=v===0;if(v>0)lastAudibleVolume=v;if(volumeValue)volumeValue.textContent=playerVolume.value+"%";syncMuteButtons()})}
+streamAudio.addEventListener("volumechange",()=>{if(playerVolume){playerVolume.value=Math.round(streamAudio.volume*100);if(volumeValue)volumeValue.textContent=playerVolume.value+"%";}syncMuteButtons()});
+
+/* Lightweight decorative canvas visualizer; it never touches the radio audio graph. */
+(()=>{const canvas=document.getElementById("fpVisualizer");if(!canvas)return;const ctx=canvas.getContext("2d");if(!ctx)return;let raf=0;
+ function draw(){const rect=canvas.getBoundingClientRect();const dpr=Math.min(window.devicePixelRatio||1,2);const w=Math.max(1,Math.floor(rect.width*dpr)),h=Math.max(1,Math.floor(rect.height*dpr));if(canvas.width!==w||canvas.height!==h){canvas.width=w;canvas.height=h}
+  ctx.clearRect(0,0,w,h);const active=!streamAudio.paused&&!streamAudio.ended;const t=performance.now()/1000;const bars=32;const gap=w/(bars*1.7);const bw=Math.max(1,gap*.62);
+  for(let i=0;i<bars;i++){const wave=(Math.sin(t*2.1+i*.58)+1)/2;const wave2=(Math.cos(t*1.3-i*.34)+1)/2;const height=(active?.12:.035)*h+(active?(wave*.24+wave2*.13)*h:Math.sin(i*.4)*.008*h);const x=i*(w/bars);const y=(h-height)/2;const grad=ctx.createLinearGradient(0,y,0,y+height);grad.addColorStop(0,"rgba(255,202,174,.85)");grad.addColorStop(1,"rgba(214,91,111,.10)");ctx.fillStyle=grad;ctx.fillRect(x,y,bw,Math.max(2,height));}
+  raf=requestAnimationFrame(draw);
+ }
+ const observer=new IntersectionObserver(entries=>{if(entries.some(e=>e.isIntersecting)){if(!raf)draw()}else if(raf){cancelAnimationFrame(raf);raf=0}});
+ observer.observe(canvas);draw();
+})();
+
+/* PWA: app shell is cached by sw.js; the live radio streams remain network-only. */
+if("serviceWorker" in navigator && location.protocol==="https:"){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}))}
+let installPromptEvent=null;
+const installButton=document.getElementById("installApp");
+window.addEventListener("beforeinstallprompt",event=>{event.preventDefault();installPromptEvent=event;if(installButton)installButton.hidden=false});
+if(installButton)installButton.addEventListener("click",async()=>{if(!installPromptEvent){showToast("В браузере открой меню ⋮ и выбери «Установить приложение» или «Добавить на главный экран».");return}installPromptEvent.prompt();await installPromptEvent.userChoice;installPromptEvent=null;installButton.hidden=true});
+window.addEventListener("appinstalled",()=>{if(installButton)installButton.hidden=true;showToast("Настроение FM установлено на устройство.")});
+
 const localHour=new Date().getHours();
 if(localHour>=5&&localHour<11){document.getElementById("momentTitle").textContent="Доброе утро";document.getElementById("momentStatus").textContent="Для начала дня подойдёт мягкий lounge."}
 else if(localHour>=11&&localHour<17){document.getElementById("momentTitle").textContent="Время своего ритма";document.getElementById("momentStatus").textContent="Выбери фокус, джаз или спокойную электронику."}
