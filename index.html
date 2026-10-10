@@ -447,7 +447,7 @@ genreButtons.forEach(button=>button.addEventListener("click",()=>{
 document.getElementById("refreshStations").addEventListener("click",()=>loadStations(currentTag));
 document.getElementById("playBtn").addEventListener("click",()=>{
  if(!currentStation){showToast("Каталог ещё загружается. Подожди пару секунд.");return}
- if(streamPlaying){streamAudio.pause();document.getElementById("status").textContent="Радио на паузе.";return}
+ if(streamPlaying){streamAudio.pause();streamPlaying=false;document.getElementById("status").textContent="Радио на паузе.";return}
  if(!streamAudio.src){const item=[...document.querySelectorAll(".stationitem")].find(el=>el.dataset.uuid===currentStation.stationuuid);const btn=item?.querySelector(".stationplay");if(btn){btn.click();return}showToast("Станция выбрана. Обнови список, если каталог не загрузился.");return}
  streamAudio.play().then(()=>{streamPlaying=true;document.getElementById("status").textContent="В эфире · "+(currentStation.name||"Интернет-радио");setPlayIcon(true)}).catch(()=>{showToast("Не удалось возобновить поток. Выбери другую станцию.");});
 });
@@ -792,7 +792,7 @@ document.getElementById("navHome").addEventListener("click",()=>window.scrollTo(
  let reconnectCount=0,reconnectTimer=null;
  streamAudio.addEventListener("playing",()=>{reconnectCount=0;if(reconnectTimer)clearTimeout(reconnectTimer);reconnectTimer=null});
  function scheduleReconnect(reason){
-  if(!currentStation||streamAudio.paused||reconnectCount>=2||reconnectTimer)return;
+  if(!currentStation||!streamPlaying||reconnectCount>=2||reconnectTimer)return;
   reconnectCount++;const delay=1800*reconnectCount;
   document.getElementById("status").textContent=reason+" Повторное подключение…";
   reconnectTimer=setTimeout(()=>{
