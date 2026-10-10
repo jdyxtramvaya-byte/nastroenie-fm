@@ -206,7 +206,7 @@ let loadToken=0;
 let toastTimer;
 const tagLabels={"chillout":"Chillout","lounge":"Lounge","jazz":"Jazz","ambient":"Ambient","deep house":"Deep House","classical":"Classical","piano":"Piano","electronic":"Electronic","reggae":"Reggae","rock":"Rock","pop":"Pop","world":"World"};
 const favorites=new Set(JSON.parse(localStorage.getItem("moodfm-favorites")||"[]"));
-let allStations=[];let favoritesMode=false;let lastAudibleVolume=.35;
+let allStations=[];let favoritesMode=false;let lastAudibleVolume=.35;let recentStations=JSON.parse(localStorage.getItem("moodfm-history")||"[]");
 const genreButtons=[...document.querySelectorAll(".mood[data-tag]")];
 function showToast(message){const el=document.getElementById("toast");el.textContent=message;el.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove("show"),3000)}
 function setPlayIcon(isPlaying){
@@ -270,6 +270,7 @@ function renderStations(){
 async function playStation(station,item,btn){
  stopStream();
  currentStation=station;
+ saveHistory(station);
  document.querySelectorAll(".stationitem").forEach(el=>el.classList.remove("playing"));
  document.querySelectorAll(".stationplay").forEach(el=>el.textContent="Слушать");
  item.classList.add("playing");btn.textContent="Запуск…";
@@ -314,8 +315,90 @@ document.getElementById("muteBtn").addEventListener("click",toggleMute);document
 document.getElementById("stationSearch").addEventListener("input",renderStations);
 document.getElementById("favoritesOnly").addEventListener("click",e=>{favoritesMode=!favoritesMode;e.currentTarget.setAttribute("aria-pressed",String(favoritesMode));e.currentTarget.classList.toggle("active",favoritesMode);e.currentTarget.textContent=favoritesMode?"♥ Только избранное":"♡ Избранное";renderStations()});
 document.getElementById("surpriseStation").addEventListener("click",()=>{const pool=allStations.filter(st=>!currentStation||st.stationuuid!==currentStation.stationuuid);if(!pool.length){showToast("Сначала загрузи список станций.");return}const station=pool[Math.floor(Math.random()*pool.length)];const item=[...document.querySelectorAll(".stationitem")].find(el=>el.dataset.uuid===station.stationuuid);if(item){item.querySelector(".stationplay").click()}else{favoritesMode=false;document.getElementById("stationSearch").value="";renderStations();const target=[...document.querySelectorAll(".stationitem")].find(el=>el.dataset.uuid===station.stationuuid);target?.querySelector(".stationplay").click()}});
+
+function saveHistory(station){
+ if(!station||!station.stationuuid)return;
+ recentStations=[station,...recentStations.filter(x=>x.stationuuid!==station.stationuuid)].slice(0,9);
+ try{localStorage.setItem("moodfm-history",JSON.stringify(recentStations))}catch(e){}
+ renderHistory();
+}
+function renderHistory(){
+ const list=document.getElementById("historyList");if(!list)return;list.innerHTML="";
+ if(!recentStations.length){list.innerHTML='<div class="history-empty">Здесь появятся станции, которые ты включал.</div>';return}
+ recentStations.slice(0,6).forEach(st=>{
+  const b=document.createElement("button");b.className="history-item";b.type="button";
+  const icon=document.createElement("span");icon.className="history-symbol";icon.textContent="♫";
+  const info=document.createElement("span");info.className="history-info";
+  const name=document.createElement("span");name.className="history-name";name.textContent=st.name||"Интернет-радио";
+  const meta=document.createElement("span");meta.className="history-meta";meta.textContent=[st.country,st.codec,st.bitrate?st.bitrate+" kbps":""].filter(Boolean).join(" · ")||"Недавно слушал";
+  info.append(name,meta);b.append(icon,info);
+  b.addEventListener("click",async()=>{
+   const tags=(st.tags||"").split(",").map(x=>x.trim().toLowerCase());
+   const tag=tags.find(x=>tagLabels[x])||currentTag;
+   await loadStations(tag);
+   const found=allStations.find(x=>x.stationuuid===st.stationuuid)||st;
+   let item=[...document.querySelectorAll(".stationitem")].find(el=>el.dataset.uuid===found.stationuuid);
+   if(!item){favoritesMode=false;document.getElementById("stationSearch").value="";renderStations();item=[...document.querySelectorAll(".stationitem")].find(el=>el.dataset.uuid===found.stationuuid)}
+   if(item)item.querySelector(".stationplay").click();
+   else{const fake=document.createElement("div");fake.className="stationitem";const btn=document.createElement("button");playStation(found,fake,btn)}
+  });
+  list.append(b);
+ });
+}
+function chooseMoment(moment){
+ const options={
+  morning:["lounge","Мягкое начало дня","Лёгкий lounge — чтобы спокойно войти в ритм."],
+  focus:["ambient","Время сосредоточиться","Ambient для работы и спокойного внимания."],
+  sunset:["jazz","Поймать закат","Тёплый джаз для медленного вечера."],
+  night:["chillout","Ночной режим","Chillout, чтобы сбавить темп."]
+ };
+ const choice=options[moment];if(!choice)return;
+ document.querySelectorAll(".moment-chip[data-moment]").forEach(b=>b.classList.toggle("active",b.dataset.moment===moment));
+ document.getElementById("momentTitle").textContent=choice[1];
+ document.getElementById("momentStatus").textContent=choice[2];
+ loadStations(choice[0]);document.getElementById("radioSection").scrollIntoView({behavior:"smooth",block:"start"});
+}
+document.querySelectorAll(".moment-chip[data-moment]").forEach(b=>b.addEventListener("click",()=>chooseMoment(b.dataset.moment)));
+document.getElementById("weatherPick").addEventListener("click",()=>{
+ const button=document.getElementById("weatherPick");
+ if(!navigator.geolocation){showToast("Геолокация недоступна в этом браузере.");return}
+ button.disabled=true;button.textContent="⌁ Определяем погоду…";
+ navigator.geolocation.getCurrentPosition(async pos=>{
+  try{
+   const url="https://api.open-meteo.com/v1/forecast?"+new URLSearchParams({latitude:pos.coords.latitude,longitude:pos.coords.longitude,current:"temperature_2m,precipitation,cloud_cover,weather_code",timezone:"auto"});
+   const r=await fetch(url,{signal:AbortSignal.timeout(8000)});if(!r.ok)throw new Error("weather unavailable");
+   const data=await r.json(),w=data.current||{},code=Number(w.weather_code);
+   const rainy=Number(w.precipitation)>0||[51,53,55,61,63,65,71,73,75,80,81,82,95,96,99].includes(code);
+   const cloudy=Number(w.cloud_cover)>65;
+   const tag=rainy?"ambient":cloudy?"jazz":Number(w.temperature_2m)>=22?"reggae":"chillout";
+   const desc=rainy?"Дождь за окном — мягкий ambient.":cloudy?"Пасмурно — выберем спокойный джаз.":Number(w.temperature_2m)>=22?"Тепло — время расслабленного грува.":"Свежая погода — включаем chillout.";
+   document.getElementById("momentTitle").textContent="Погода подсказывает";
+   document.getElementById("momentStatus").textContent=desc+" Сейчас "+Math.round(Number(w.temperature_2m))+"°C.";
+   document.querySelectorAll(".moment-chip[data-moment]").forEach(b=>b.classList.remove("active"));
+   loadStations(tag);document.getElementById("radioSection").scrollIntoView({behavior:"smooth",block:"start"});
+  }catch(e){showToast("Не удалось получить погоду. Проверь подключение и разрешение геолокации.")}
+  finally{button.disabled=false;button.textContent="⌁ По погоде"}
+ },()=>{button.disabled=false;button.textContent="⌁ По погоде";showToast("Разреши геолокацию, чтобы подобрать музыку по погоде.")},{timeout:10000,maximumAge:600000});
+});
+document.getElementById("similarStations").addEventListener("click",()=>{
+ const tags=(currentStation?.tags||"").split(",").map(x=>x.trim().toLowerCase()).filter(x=>x&&tagLabels[x]);
+ const tag=tags.find(x=>x!==currentTag)||tags[0]||currentTag;
+ document.getElementById("momentTitle").textContent="Похожие по звучанию";
+ document.getElementById("momentStatus").textContent="Ищем станции с похожими жанровыми тегами в каталоге Radio Browser.";
+ loadStations(tag);document.getElementById("radioSection").scrollIntoView({behavior:"smooth",block:"start"});
+});
+document.getElementById("clearHistory").addEventListener("click",()=>{
+ recentStations=[];try{localStorage.removeItem("moodfm-history")}catch(e){}renderHistory();showToast("История прослушивания очищена.");
+});
+
 document.getElementById("aboutLink").addEventListener("click",e=>{e.preventDefault();showToast("Настроение FM — подборка независимых интернет-радиостанций по жанрам.")});
 document.getElementById("year").textContent=new Date().getFullYear();
+renderHistory();
+const localHour=new Date().getHours();
+if(localHour>=5&&localHour<11){document.getElementById("momentTitle").textContent="Доброе утро";document.getElementById("momentStatus").textContent="Для начала дня подойдёт мягкий lounge."}
+else if(localHour>=11&&localHour<17){document.getElementById("momentTitle").textContent="Время своего ритма";document.getElementById("momentStatus").textContent="Выбери фокус, джаз или спокойную электронику."}
+else if(localHour>=17&&localHour<22){document.getElementById("momentTitle").textContent="Вечер — твой";document.getElementById("momentStatus").textContent="Джаз или chillout помогут замедлиться."}
+else{document.getElementById("momentTitle").textContent="Тихая ночь";document.getElementById("momentStatus").textContent="Попробуй ambient для спокойной атмосферы."}
 loadStations("chillout");
 </script>
 <script>
