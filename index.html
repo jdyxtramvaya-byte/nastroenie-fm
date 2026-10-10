@@ -67,6 +67,57 @@ body{padding-bottom:112px}
 }
 @media(min-width:701px){.content{padding-bottom:40px}.player-section{padding-bottom:20px}}
 
+
+/* Full-screen now-playing experience */
+.bottom-player .trackrow{cursor:pointer;position:relative;border-radius:12px;padding:5px; margin-left:-5px;transition:background .2s}
+.bottom-player .trackrow:hover{background:#ffffff08}
+.bottom-player .trackrow:after{content:"ОТКРЫТЬ ПЛЕЕР ↗";position:absolute;left:72px;bottom:-3px;font-size:7px;letter-spacing:.13em;color:#8f8993;opacity:0;transition:opacity .2s}
+.bottom-player .trackrow:hover:after{opacity:1}
+.fullplayer{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;padding:28px;background:rgba(7,7,9,.97);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);opacity:0;visibility:hidden;pointer-events:none;transform:scale(1.025);transition:opacity .42s ease,transform .55s cubic-bezier(.2,.8,.2,1),visibility .42s;overflow-y:auto}
+.fullplayer.open{opacity:1;visibility:visible;pointer-events:auto;transform:scale(1)}
+.fullplayer:before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 22%,#8c3d4735,transparent 43%),radial-gradient(ellipse at 12% 90%,#b9653815,transparent 35%);pointer-events:none}
+.fp-close{position:absolute;top:max(22px,env(safe-area-inset-top));right:max(22px,env(safe-area-inset-right));width:46px;height:46px;border:1px solid #ffffff20;background:#ffffff08;border-radius:50%;display:grid;place-items:center;color:#f5f0f0;z-index:2;transition:transform .2s,background .2s}
+.fp-close:hover{transform:rotate(90deg);background:#ffffff14}
+.fp-inner{position:relative;width:min(100%,560px);display:flex;flex-direction:column;align-items:center;text-align:center;padding:36px 0 22px}
+.fp-label{font-size:10px;letter-spacing:.24em;color:#f09b87;font-weight:750;text-transform:uppercase}
+.fp-art{width:min(67vw,320px);height:min(67vw,320px);max-width:320px;max-height:320px;min-width:215px;min-height:215px;position:relative;display:grid;place-items:center;margin:30px auto 27px;border-radius:30px;overflow:hidden;background:radial-gradient(ellipse at 30% 20%,#ffbd9b,transparent 35%),radial-gradient(ellipse at 76% 73%,#873e66,transparent 45%),linear-gradient(145deg,#633c55,#201b2b 70%);box-shadow:0 28px 90px #0008,0 0 70px #a94d4c20;isolation:isolate}
+.fp-art:before,.fp-art:after{content:"";position:absolute;border:1px solid #ffe0d15e;border-radius:50%;width:78%;height:78%;transform:rotate(-28deg) scaleX(.66);box-shadow:0 0 0 17px #ffffff05,0 0 0 36px #ffffff04,0 0 0 58px #ffffff03}
+.fp-art:after{width:48%;height:48%;background:linear-gradient(135deg,#ffccad,#d16b79 60%,#49314f);border:0;box-shadow:inset -22px -18px 45px #2c1a35a8,0 0 45px #f9a38b25;transform:translate(9px,-8px) rotate(22deg)}
+.fp-note{position:relative;z-index:1;color:#fff;font-size:39px;font-weight:250;letter-spacing:-.1em;text-shadow:0 3px 20px #0004}
+.fp-title{width:100%;font-size:clamp(24px,5vw,34px);font-weight:750;letter-spacing:-.06em;line-height:1.12;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin:0}
+.fp-subtitle{font-size:12px;color:#a8a0aa;margin-top:10px;line-height:1.6}
+.fp-live{display:flex;align-items:center;gap:8px;margin:24px 0 19px;color:#d1c9d0;font-size:10px;letter-spacing:.15em;text-transform:uppercase}
+.fp-live span{width:7px;height:7px;border-radius:50%;background:#ff8d76;box-shadow:0 0 13px #ff8d7670}
+.fp-equalizer{height:30px;display:flex;align-items:center;justify-content:center;gap:4px;margin:0 0 25px}
+.fp-equalizer i{width:3px;height:var(--h);border-radius:4px;background:linear-gradient(#ffc0a5,#d55e6a);opacity:.65}
+.fullplayer.is-playing .fp-equalizer i{animation:fpwave .85s ease-in-out infinite alternate;animation-delay:var(--d)}
+@keyframes fpwave{from{transform:scaleY(.35);opacity:.45}to{transform:scaleY(1);opacity:1}}
+.fp-controls{display:flex;align-items:center;justify-content:center;gap:27px;margin:0 0 27px}
+.fp-play{width:76px;height:76px;border:0;border-radius:50%;background:#f8f2ed;color:#191417;display:grid;place-items:center;box-shadow:0 10px 38px #0004;transition:transform .2s}
+.fp-play:hover{transform:scale(1.06)}
+.fp-skip{width:45px;height:45px;border:1px solid #ffffff1a;background:#ffffff08;border-radius:50%;display:grid;place-items:center;color:#e6dfe4;font-size:18px}
+.fp-volume{display:flex;align-items:center;gap:12px;width:min(100%,300px);color:#aaa2ad}
+.fp-volume input{flex:1;min-width:0;accent-color:#f5d9cd}
+.fp-footer{margin-top:30px;font-size:9px;color:#6e6872;letter-spacing:.09em}
+@media(max-width:700px){
+ .fullplayer{padding:20px 22px}
+ .fp-inner{padding:42px 0 20px}
+ .fp-art{margin:28px auto 25px;width:min(68vw,290px);height:min(68vw,290px);min-width:210px;min-height:210px;border-radius:26px}
+ .fp-title{font-size:25px}
+ .fp-controls{gap:23px;margin-bottom:25px}
+ .fp-play{width:70px;height:70px}
+ .fp-footer{margin-top:24px}
+ .fp-close{width:42px;height:42px}
+}
+@media(max-height:720px){
+ .fp-inner{padding-top:26px;padding-bottom:10px}
+ .fp-art{width:min(43vh,260px);height:min(43vh,260px);min-width:170px;min-height:170px;margin:18px auto}
+ .fp-live{margin:15px 0 12px}
+ .fp-equalizer{margin-bottom:15px}
+ .fp-controls{margin-bottom:16px}
+ .fp-footer{margin-top:14px}
+}
+
 </style>
 </head><body>
 <div class="app">
@@ -95,6 +146,25 @@ body{padding-bottom:112px}
 </div></div>
 
 <div class="bottom-player" id="bottomPlayer" aria-label="Радиоплеер">
+</div>
+
+<div class="fullplayer" id="fullPlayer" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Полноэкранный радиоплеер">
+ <button class="fp-close" id="fpClose" type="button" aria-label="Закрыть плеер"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
+ <div class="fp-inner">
+  <div class="fp-label">НАСТРОЕНИЕ FM · NOW PLAYING</div>
+  <div class="fp-art" aria-hidden="true"><div class="fp-note">♫</div></div>
+  <h2 class="fp-title" id="fpTitle">Выбери радиостанцию</h2>
+  <div class="fp-subtitle" id="fpSubtitle">Твой звук. Твой мир.</div>
+  <div class="fp-live"><span></span><b id="fpLiveText">ГОТОВ К ЭФИРУ</b></div>
+  <div class="fp-equalizer" aria-hidden="true"><i style="--h:8px;--d:-.1s"></i><i style="--h:18px;--d:-.5s"></i><i style="--h:12px;--d:-.3s"></i><i style="--h:25px;--d:-.7s"></i><i style="--h:15px;--d:-.2s"></i><i style="--h:22px;--d:-.6s"></i><i style="--h:10px;--d:-.4s"></i><i style="--h:19px;--d:-.8s"></i><i style="--h:7px;--d:-.25s"></i></div>
+  <div class="fp-controls">
+   <button class="fp-skip" id="fpPrev" type="button" aria-label="Предыдущая станция" title="Предыдущая станция"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h2v14H6zM19 5v14L9 12z"/></svg></button>
+   <button class="fp-play" id="fpPlay" type="button" aria-label="Включить радио"><svg id="fpPlayIcon" width="27" height="27" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l10-6.5z"/></svg></button>
+   <button class="fp-skip" id="fpNext" type="button" aria-label="Следующая станция" title="Следующая станция"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M16 5h2v14h-2zM5 5v14l10-7z"/></svg></button>
+  </div>
+  <div class="fp-volume"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M11 5 6 9H3v6h3l5 4zM15.5 8.5a5 5 0 0 1 0 7" stroke-linecap="round" stroke-linejoin="round"/></svg><input id="fpVolume" type="range" min="0" max="1" step=".01" value=".35" aria-label="Громкость"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M11 5 6 9H3v6h3l5 4zM15.5 8.5a5 5 0 0 1 0 7M18 5a9 9 0 0 1 0 14" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+  <div class="fp-footer">ИНТЕРНЕТ-РАДИО · ЖИВОЙ ЭФИР</div>
+ </div>
 </div>
 <div class="toast" id="toast" role="status"></div>
 <script>
@@ -213,6 +283,58 @@ document.getElementById("navHome").addEventListener("click",()=>window.scrollTo(
  const controls=document.querySelector(".player .controls");
  if(track)dock.appendChild(track);
  if(controls)dock.appendChild(controls);
+})();
+</script>
+
+<script>
+(()=>{
+ const overlay=document.getElementById("fullPlayer");
+ const dock=document.getElementById("bottomPlayer");
+ const track=dock.querySelector(".trackrow");
+ const fpTitle=document.getElementById("fpTitle");
+ const fpSubtitle=document.getElementById("fpSubtitle");
+ const fpLive=document.getElementById("fpLiveText");
+ const fpPlayIcon=document.getElementById("fpPlayIcon");
+ const audio=document.getElementById("streamAudio");
+ const volume=document.getElementById("volume");
+ const fpVolume=document.getElementById("fpVolume");
+ const fpPlay=document.getElementById("fpPlay");
+ let lastFocus=null;
+ function sync(){
+  const playing=!audio.paused&&!audio.ended;
+  overlay.classList.toggle("is-playing",playing);
+  fpPlayIcon.innerHTML=playing?'<path d="M6 4h4v16H6zM14 4h4v16h-4z"/>':'<path d="M8 5.5v13l10-6.5z"/>';
+  fpPlay.setAttribute("aria-label",playing?"Поставить радио на паузу":"Включить радио");
+  fpLive.textContent=playing?"СЕЙЧАС В ЭФИРЕ":(audio.src?"ПАУЗА":"ГОТОВ К ЭФИРУ");
+  fpTitle.textContent=document.getElementById("trackTitle").textContent;
+  fpSubtitle.textContent=document.getElementById("trackSub").textContent;
+  fpVolume.value=volume.value;
+ }
+ function open(){lastFocus=document.activeElement;sync();overlay.classList.add("open");overlay.setAttribute("aria-hidden","false");document.body.style.overflow="hidden";document.getElementById("fpClose").focus()}
+ function close(){overlay.classList.remove("open");overlay.setAttribute("aria-hidden","true");document.body.style.overflow="";if(lastFocus&&lastFocus.focus)lastFocus.focus()}
+ track.setAttribute("role","button");track.setAttribute("tabindex","0");track.setAttribute("aria-label","Открыть полноэкранный плеер");
+ track.addEventListener("click",open);track.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();open()}});
+ dock.addEventListener("click",e=>{if(e.target.closest(".controls")||e.target.closest("button")||e.target.closest("input")||e.target.closest("label"))return;open()});
+ document.getElementById("fpClose").addEventListener("click",close);
+ overlay.addEventListener("click",e=>{if(e.target===overlay)close()});
+ document.addEventListener("keydown",e=>{if(e.key==="Escape"&&overlay.classList.contains("open"))close()});
+ fpPlay.addEventListener("click",()=>{document.getElementById("playBtn").click();setTimeout(sync,80)});
+ fpVolume.addEventListener("input",()=>{volume.value=fpVolume.value;volume.dispatchEvent(new Event("input",{bubbles:true}))});
+ document.getElementById("fpPrev").addEventListener("click",()=>step(-1));
+ document.getElementById("fpNext").addEventListener("click",()=>step(1));
+ function step(delta){
+  const items=[...document.querySelectorAll(".stationitem")];
+  if(!items.length){showToast("Сначала дождись загрузки станций.");return}
+  let index=items.findIndex(el=>el.classList.contains("playing"));
+  if(index<0)index=0;else index=(index+delta+items.length)%items.length;
+  const btn=items[index].querySelector(".stationplay");if(btn)btn.click();
+  setTimeout(sync,180);
+ }
+ audio.addEventListener("playing",sync);audio.addEventListener("pause",sync);audio.addEventListener("error",sync);
+ const title=document.getElementById("trackTitle"),sub=document.getElementById("trackSub");
+ new MutationObserver(sync).observe(title,{childList:true,subtree:true,characterData:true});
+ new MutationObserver(sync).observe(sub,{childList:true,subtree:true,characterData:true});
+ document.getElementById("playBtn").addEventListener("click",()=>setTimeout(sync,50));
 })();
 </script>
 </body></html>
