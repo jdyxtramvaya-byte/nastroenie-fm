@@ -267,7 +267,7 @@ function renderStations(){
  });
  document.getElementById("stationHint").textContent="Показано: "+filtered.length+" · станция уже выбрана";
 }
-async function playStation(station,item,btn){
+async function playStation(station,item,btn,attempt=0){
  stopStream();
  currentStation=station;
  saveHistory(station);
@@ -291,8 +291,23 @@ async function playStation(station,item,btn){
   setPlayIcon(true);
  }catch(e){
   streamPlaying=false;btn.textContent="Повторить";item.classList.remove("playing");
-  document.getElementById("status").textContent="Не удалось запустить поток. Попробуй другую станцию.";
-  setPlayIcon(false);showToast("Этот поток недоступен. Выбери другую станцию.");
+  setPlayIcon(false);
+  if(attempt<2&&allStations.length>1){
+   document.getElementById("status").textContent="Поток не ответил. Пробуем другую станцию…";
+   const idx=allStations.findIndex(x=>x.stationuuid===station.stationuuid);
+   const nextStation=allStations[(idx+1+allStations.length)%allStations.length];
+   showToast("Станция недоступна — переключаемся на другую.");
+   favoritesMode=false;
+   document.getElementById("favoritesOnly").setAttribute("aria-pressed","false");
+   document.getElementById("favoritesOnly").classList.remove("active");
+   document.getElementById("favoritesOnly").textContent="♡ Избранное";
+   document.getElementById("stationSearch").value="";
+   renderStations();
+   const nextItem=[...document.querySelectorAll(".stationitem")].find(el=>el.dataset.uuid===nextStation.stationuuid);
+   if(nextItem){setTimeout(()=>playStation(nextStation,nextItem,nextItem.querySelector(".stationplay"),attempt+1),250);return}
+  }
+  document.getElementById("status").textContent="Не удалось запустить несколько потоков. Выбери другую станцию.";
+  showToast("Не удалось запустить поток. Попробуй другую станцию.");
  }
 }
 streamAudio.addEventListener("playing",()=>{streamPlaying=true;setPlayIcon(true)});
