@@ -252,6 +252,7 @@ let currentTag="chillout";
 let streamPlaying=false;
 let loadToken=0;
 let playRequestToken=0;
+let streamRetrying=false;
 let toastTimer;
 const tagLabels={"chillout":"Chillout","lounge":"Lounge","jazz":"Jazz","ambient":"Ambient","deep house":"Deep House","classical":"Classical","piano":"Piano","electronic":"Electronic","reggae":"Reggae","rock":"Rock","pop":"Pop","world":"World"};
 const favorites=new Set(JSON.parse(localStorage.getItem("moodfm-favorites")||"[]"));
@@ -365,7 +366,25 @@ async function playStation(station,item,btn,attempt=0){
 }
 streamAudio.addEventListener("playing",()=>{streamPlaying=true;setPlayIcon(true)});
 streamAudio.addEventListener("pause",()=>{streamPlaying=false;setPlayIcon(false)});
-streamAudio.addEventListener("error",()=>{streamPlaying=false;setPlayIcon(false);if(currentStation)document.getElementById("status").textContent="Поток прервался. Попробуй другую станцию."});
+streamAudio.addEventListener("error",()=>{
+ const shouldRecover=streamPlaying&&!streamRetrying&&!!currentStation&&allStations.length>1;
+ streamPlaying=false;setPlayIcon(false);
+ if(shouldRecover){
+  streamRetrying=true;
+  const failed=currentStation;
+  document.getElementById("status").textContent="Поток прервался. Ищем резервную станцию…";
+  showToast("Связь прервалась — переключаемся на резервный поток.");
+  const idx=allStations.findIndex(x=>x.stationuuid===failed.stationuuid);
+  const backup=allStations[(idx+1+allStations.length)%allStations.length];
+  favoritesMode=false;document.getElementById("stationSearch").value="";renderStations();
+  setTimeout(()=>{
+   const item=[...document.querySelectorAll(".stationitem")].find(el=>el.dataset.uuid===backup.stationuuid);
+   if(item){playStation(backup,item,item.querySelector(".stationplay"))}
+   else{const fake=document.createElement("div");fake.className="stationitem";const btn=document.createElement("button");btn.className="stationplay";playStation(backup,fake,btn)}
+   setTimeout(()=>{streamRetrying=false},1800);
+  },350);
+ }else if(currentStation)document.getElementById("status").textContent="Поток прервался. Попробуй другую станцию.";
+});
 genreButtons.forEach(button=>button.addEventListener("click",()=>{
  if(currentTag!==button.dataset.tag||!document.getElementById("stationList").querySelector(".stationitem"))loadStations(button.dataset.tag);
  else{currentTag=button.dataset.tag;genreButtons.forEach(b=>b.setAttribute("aria-pressed",String(b===button)))}
