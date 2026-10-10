@@ -15,6 +15,58 @@ footer{display:flex;justify-content:space-between;align-items:center;gap:14px;co
 @media(max-width:1000px){.app{grid-template-columns:205px minmax(0,1fr)}.content{padding-left:26px;padding-right:26px}.hero{padding:32px}.hero-art:after{right:7%}.moods{gap:9px}.mood{min-height:160px;padding:14px}.moodicon{margin-bottom:35px}.stationlist{grid-template-columns:1fr}}
 @media(max-width:700px){.app{display:block}.sidebar{display:none}.content{padding:0 15px 145px}.topbar{height:65px}.crumb{font-size:10px}.live{font-size:8px;letter-spacing:.1em}.profile{width:31px;height:31px}main{gap:29px}.hero{min-height:320px;padding:25px 22px;border-radius:3px 20px 20px 20px;align-items:flex-end}.hero-art:before{width:245px;height:390px;right:-18%;top:-45%;box-shadow:0 0 0 12px #e3a09b0a,0 0 0 36px #e3a09b08,0 0 0 68px #e3a09b06}.hero-art:after{width:175px;height:175px;right:3%;top:2%}.hero-content{margin-top:105px}.headline{font-size:clamp(42px,11vw,57px);margin:15px 0 12px}.intro{font-size:11px;max-width:290px}.hero-pill{margin-top:19px;padding:12px 16px}.sectionhead{margin-bottom:14px}.sectionhead h2{font-size:22px}.moods{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.mood{min-height:159px;padding:14px;border-radius:15px}.moodicon{width:33px;height:33px;margin-bottom:42px}.moodname{font-size:14px}.mooddesc{font-size:9px}.player{padding:14px;border-radius:17px}.trackrow{gap:10px}.cover{width:44px;height:44px}.tracktitle{font-size:12px}.tracksub{font-size:9px}.wave{gap:2px}.stationbox{margin-top:16px;padding-top:16px}.stationheading{font-size:13px}.stationlist{grid-template-columns:1fr;gap:7px}.stationitem{padding:9px}.stationmark{width:35px;height:35px}.controls{gap:9px}.play{width:40px;height:40px}.vol{width:65px}.status{font-size:9px}footer{align-items:flex-start;flex-direction:column;gap:10px}.footerlinks{gap:14px}.toast{bottom:105px}}
 @media(max-width:370px){.wave{display:none}.vol{width:52px}.status{max-width:100px}}
+
+/* Radio player v2 — compact music-service dock */
+body{padding-bottom:112px}
+.player-section .sectionhead{margin-bottom:16px}
+.player{padding:0;background:transparent;border:0;border-radius:0}
+.player>.trackrow{display:none}
+.stationbox{margin:0;padding:0;border:0}
+.stationtop{padding:0 0 13px;border-bottom:1px solid #ffffff12}
+.stationheading{font-size:19px;font-weight:720;letter-spacing:-.045em}
+.stationhint{font-size:11px}
+.refreshstations{padding:9px 13px;border-radius:10px;background:#ffffff08;border-color:#ffffff12}
+.stationlist{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.stationitem{min-height:70px;padding:12px;background:#17171b;border:1px solid #ffffff08;border-radius:14px}
+.stationitem:hover{background:#202025;border-color:#ffffff1c}
+.stationmark{width:44px;height:44px;border-radius:10px;background:linear-gradient(145deg,#ff795e,#b94e57);color:#fff;font-size:19px}
+.stationname{font-size:12px}
+.stationmeta{font-size:10px}
+.stationplay{width:35px;height:35px;padding:0;font-size:0;border-radius:50%;display:grid;place-items:center;flex-shrink:0}
+.stationplay:after{content:"▶";font-size:11px;margin-left:2px}
+.stationitem.playing .stationplay:after{content:"Ⅱ";font-size:12px;margin-left:0}
+.stationitem.playing .stationmark{background:linear-gradient(145deg,#ff9b80,#d65d69)}
+.bottom-player{position:fixed;z-index:50;left:0;right:0;bottom:0;min-height:88px;padding:13px max(24px,calc((100vw - 1280px)/2));display:grid;grid-template-columns:minmax(210px,1fr) auto minmax(170px,1fr);align-items:center;gap:22px;background:rgba(19,19,22,.94);border-top:1px solid #ffffff13;box-shadow:0 -14px 40px #0003;backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px)}
+.bottom-player .trackrow{min-width:0;gap:13px}
+.bottom-player .cover{width:54px;height:54px;border-radius:10px;background:linear-gradient(145deg,#fa987b,#b34d64);color:#fff;box-shadow:none}
+.bottom-player .tracktitle{font-size:13px;font-weight:700}
+.bottom-player .tracksub{font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:320px}
+.bottom-player .wave{display:none}
+.bottom-player .controls{display:flex;align-items:center;gap:12px;margin:0;padding:0;border:0}
+.bottom-player .play{width:46px;height:46px;background:#f7f5f2;color:#171719}
+.bottom-player .status{display:none}
+.bottom-player .controls label{margin-left:4px;color:#aaa5ad}
+.bottom-player .vol{width:110px;accent-color:#f7f5f2}
+.bottom-player:before{content:"LIVE RADIO";position:absolute;right:24px;top:8px;font-size:8px;letter-spacing:.16em;color:#ff8b75}
+@media(max-width:700px){
+ body{padding-bottom:94px}
+ .player-section .sectionhead h2{font-size:22px}
+ .stationheading{font-size:17px}
+ .stationlist{grid-template-columns:1fr;gap:8px}
+ .stationitem{min-height:65px;padding:10px}
+ .stationmark{width:40px;height:40px}
+ .bottom-player{min-height:78px;padding:11px 14px;grid-template-columns:minmax(0,1fr) auto;gap:12px}
+ .bottom-player .trackrow{gap:10px}
+ .bottom-player .cover{width:45px;height:45px}
+ .bottom-player .tracktitle{font-size:11px}
+ .bottom-player .tracksub{font-size:9px;max-width:calc(100vw - 180px)}
+ .bottom-player .controls{gap:8px}
+ .bottom-player .play{width:42px;height:42px}
+ .bottom-player .controls label,.bottom-player .vol{display:none}
+ .bottom-player:before{right:12px;top:3px;font-size:7px}
+}
+@media(min-width:701px){.content{padding-bottom:40px}.player-section{padding-bottom:20px}}
+
 </style>
 </head><body>
 <div class="app">
@@ -41,6 +93,9 @@ footer{display:flex;justify-content:space-between;align-items:center;gap:14px;co
 </main>
 <footer><span>© <span id="year"></span> НАСТРОЕНИЕ FM</span><div class="footerlinks"><a href="#" id="aboutLink">О проекте</a><a href="https://github.com/jdyxtramvaya-byte/nastroenie-fm">GitHub</a></div></footer>
 </div></div>
+
+<div class="bottom-player" id="bottomPlayer" aria-label="Радиоплеер">
+</div>
 <div class="toast" id="toast" role="status"></div>
 <script>
 const streamAudio=document.getElementById("streamAudio");
@@ -150,4 +205,14 @@ document.getElementById("heroChoose").addEventListener("click",()=>document.getE
 document.getElementById("navGenres").addEventListener("click",()=>document.getElementById("genresSection").scrollIntoView({behavior:"smooth",block:"start"}));
 document.getElementById("navRadio").addEventListener("click",()=>document.getElementById("radioSection").scrollIntoView({behavior:"smooth",block:"start"}));
 document.getElementById("navHome").addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"}));
-</script></body></html>
+</script>
+<script>
+(()=>{
+ const dock=document.getElementById("bottomPlayer");
+ const track=document.querySelector(".player .trackrow");
+ const controls=document.querySelector(".player .controls");
+ if(track)dock.appendChild(track);
+ if(controls)dock.appendChild(controls);
+})();
+</script>
+</body></html>
