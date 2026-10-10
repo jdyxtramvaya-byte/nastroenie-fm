@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#11110f">
+<meta name="description" content="Настроение FM — музыка под твой момент.">
+<title>Настроение FM — музыка, которая чувствует момент</title>
+<style>
+:root{color-scheme:dark;--bg:#11110f;--panel:rgba(255,255,255,.055);--line:rgba(255,255,255,.11);--muted:#aaa79e;--gold:#e7b96c;--cream:#f4efe5}
+*{box-sizing:border-box}html{min-height:100%;background:var(--bg)}body{margin:0;min-height:100vh;color:var(--cream);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(ellipse at 15% 10%,rgba(125,81,38,.2),transparent 38%),radial-gradient(ellipse at 85% 65%,rgba(91,70,104,.16),transparent 40%),var(--bg);letter-spacing:-.02em}
+button{font:inherit;color:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}button:focus-visible{outline:2px solid var(--gold);outline-offset:4px}.shell{width:min(1120px,100%);margin:auto;padding:28px 24px 34px;min-height:100vh;display:flex;flex-direction:column}
+header{display:flex;justify-content:space-between;align-items:center;gap:16px}.brand{display:flex;align-items:center;gap:12px}.logo{width:42px;height:42px;border:1px solid #80663f;border-radius:15px;display:grid;place-items:center;color:var(--gold);background:linear-gradient(145deg,rgba(231,185,108,.15),rgba(255,255,255,.02))}.brandname{font-size:15px;font-weight:750;letter-spacing:.13em}.brandtag{font-size:11px;color:var(--muted);margin-top:4px;letter-spacing:.03em}.live{display:flex;align-items:center;gap:8px;color:#c8c1b3;font-size:12px;border:1px solid var(--line);padding:9px 12px;border-radius:99px;background:rgba(255,255,255,.025)}.dot{width:7px;height:7px;border-radius:50%;background:#d4a75e;box-shadow:0 0 12px #d4a75e66}
+main{flex:1;display:grid;grid-template-columns:1fr .82fr;align-items:center;gap:clamp(30px,7vw,90px);padding:clamp(46px,8vh,100px) 0}.eyebrow{color:var(--gold);text-transform:uppercase;letter-spacing:.22em;font-size:11px;font-weight:700}.headline{font-size:clamp(42px,6.5vw,78px);line-height:.99;letter-spacing:-.065em;font-weight:650;margin:22px 0}.headline span{color:var(--gold);font-family:Georgia,serif;font-style:italic;font-weight:400}.intro{max-width:440px;color:#b9b4aa;line-height:1.75;font-size:15px}.player{margin-top:34px;padding:20px;border:1px solid var(--line);border-radius:24px;background:linear-gradient(135deg,rgba(255,255,255,.075),rgba(255,255,255,.025));box-shadow:0 22px 80px #0003;backdrop-filter:blur(18px)}.trackrow{display:flex;align-items:center;gap:14px}.cover{width:58px;height:58px;flex-shrink:0;border-radius:17px;background:radial-gradient(circle at 65% 28%,#f1cf8a,transparent 19%),radial-gradient(circle at 30% 75%,#6c4c4d,transparent 37%),linear-gradient(140deg,#544638,#201e24 70%);display:grid;place-items:center;border:1px solid #ffffff18;color:#f3d7a3}.trackmeta{min-width:0;flex:1}.tracktitle{font-weight:650;font-size:15px}.tracksub{color:var(--muted);font-size:12px;margin-top:6px}.wave{display:flex;align-items:center;gap:3px;height:25px}.wave i{display:block;width:3px;border-radius:9px;background:#cba76b;height:var(--h);opacity:.65}.controls{display:flex;align-items:center;gap:15px;margin-top:20px}.play{width:54px;height:54px;border:0;border-radius:50%;background:var(--gold);color:#21190f;display:grid;place-items:center;box-shadow:0 5px 24px #d7aa5830;transition:transform .2s,filter .2s}.play:active{transform:scale(.96)}.play:hover{filter:brightness(1.08)}.status{font-size:12px;color:var(--muted);flex:1;line-height:1.5}.vol{width:92px;accent-color:var(--gold)}.sectionhead{display:flex;justify-content:space-between;align-items:center;margin:0 0 14px}.sectionhead h2{font-size:13px;letter-spacing:.02em;font-weight:600;margin:0}.sectionhead span{font-size:11px;color:var(--muted)}.moods{display:grid;grid-template-columns:1fr 1fr;gap:10px}.mood{border:1px solid var(--line);background:var(--panel);border-radius:18px;padding:17px 16px;text-align:left;min-height:106px;transition:background .2s,border-color .2s,transform .2s}.mood:hover{transform:translateY(-2px);background:#ffffff0b}.mood[aria-pressed=true]{border-color:#b18a51;background:linear-gradient(140deg,#d7a95f20,#ffffff04)}.moodicon{display:block;color:var(--gold);margin-bottom:13px;font-size:18px}.moodname{font-size:14px;font-weight:650}.mooddesc{font-size:11px;color:var(--muted);margin-top:5px}.rightcol{min-width:0}.quote{margin-top:25px;border-top:1px solid var(--line);padding-top:19px;color:#a9a397;font-family:Georgia,serif;font-size:16px;font-style:italic;line-height:1.5}.quote small{display:block;font-family:inherit;font-style:normal;font-size:10px;text-transform:uppercase;letter-spacing:.16em;color:#827c71;margin-top:10px}
+footer{display:flex;justify-content:space-between;align-items:center;gap:14px;border-top:1px solid var(--line);padding-top:20px;color:#827e75;font-size:11px}.footerlinks{display:flex;gap:18px}.footerlinks a{color:#b3ac9f;text-decoration:none}.footerlinks a:hover{color:var(--gold)}.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);opacity:0;pointer-events:none;padding:12px 16px;border:1px solid var(--line);border-radius:14px;background:#25231f;color:#eee6d7;font-size:12px;transition:.25s;max-width:calc(100vw - 32px);text-align:center}.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:760px){.shell{padding:20px 17px 24px}main{grid-template-columns:1fr;gap:36px;padding:55px 0 45px}.headline{font-size:clamp(48px,13vw,72px);margin:18px 0}.intro{font-size:14px}.player{margin-top:27px;padding:16px}.rightcol{max-width:560px;width:100%}.mood{min-height:100px}.quote{margin-top:20px}footer{align-items:flex-start;flex-direction:column}.footerlinks{gap:15px}}@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="shell">
+<header>
+  <div class="brand"><div class="logo" aria-hidden="true"><svg width="23" height="23" viewBox="0 0 24 24" fill="none"><path d="M4 10v4M8 6v12M12 3v18M16 7v10M20 10v4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></div><div><div class="brandname">НАСТРОЕНИЕ FM</div><div class="brandtag">Музыка, которая чувствует момент</div></div></div>
+  <div class="live"><span class="dot"></span><span>ИНТЕРНЕТ-РАДИО</span></div>
+</header>
+<main>
+<section>
+  <div class="eyebrow">Твоя частота. Твой момент.</div>
+  <h1 class="headline">Останься<br>в своём<br><span>настроении.</span></h1>
+  <p class="intro">Музыка для дороги, тихого вечера, больших мыслей и моментов, когда слова не нужны. Просто включи — и побудь здесь.</p>
+  <div class="player" aria-label="Музыкальный плеер">
+    <div class="trackrow"><div class="cover" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M9 18V5l11-2v13M9 18c0 1.1-1.3 2-3 2s-3-.9-3-2 1.3-2 3-2 3 .9 3 2Zm11-2c0 1.1-1.3 2-3 2s-3-.9-3-2 1.3-2 3-2 3 .9 3 2Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg></div><div class="trackmeta"><div class="tracktitle" id="trackTitle">Твоя музыка — впереди</div><div class="tracksub" id="trackSub">Настроение FM · тестовый режим</div></div><div class="wave" aria-hidden="true"><i style="--h:8px"></i><i style="--h:16px"></i><i style="--h:11px"></i><i style="--h:22px"></i><i style="--h:13px"></i><i style="--h:18px"></i><i style="--h:7px"></i></div></div>
+    <div class="controls"><button class="play" id="playBtn" aria-label="Проверить плеер" title="Проверить плеер"><svg id="playIcon" width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l10-6.5z"/></svg></button><div class="status" id="status" aria-live="polite">Станция готовится к первому эфиру.<br>Аудиопоток подключим следующим этапом.</div><label aria-label="Громкость"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M11 5 6 9H3v6h3l5 4zM15.5 8.5a5 5 0 0 1 0 7M18 5a9 9 0 0 1 0 14" stroke-linecap="round" stroke-linejoin="round"/></svg></label><input class="vol" id="volume" type="range" min="0" max="1" step=".01" value=".75" aria-label="Громкость" disabled></div>
+  </div>
+</section>
+<section class="rightcol">
+  <div class="sectionhead"><h2>Выбери своё состояние</h2><span>01 — 04</span></div>
+  <div class="moods">
+    <button class="mood" data-mood="morning" aria-pressed="false"><span class="moodicon">↗</span><span class="moodname">Лёгкое утро</span><div class="mooddesc">Начать без спешки</div></button>
+    <button class="mood" data-mood="flow" aria-pressed="true"><span class="moodicon">〰</span><span class="moodname">В своём потоке</span><div class="mooddesc">Сосредоточиться на своём</div></button>
+    <button class="mood" data-mood="evening" aria-pressed="false"><span class="moodicon">☼</span><span class="moodname">Тёплый вечер</span><div class="mooddesc">Отпустить суету</div></button>
+    <button class="mood" data-mood="night" aria-pressed="false"><span class="moodicon">☾</span><span class="moodname">После полуночи</span><div class="mooddesc">Музыка для тишины</div></button>
+  </div>
+  <div class="quote" id="quote">«Иногда достаточно одной песни, чтобы день стал другим.»<small id="quoteLabel">Твоя частота</small></div>
+</section>
+</main>
+<footer><span>© <span id="year"></span> НАСТРОЕНИЕ FM · Первая версия</span><div class="footerlinks"><a href="#" id="aboutLink">О проекте</a><a href="https://github.com/jdyxtramvaya-byte/nastroenie-fm">GitHub</a></div></footer>
+</div>
+<div class="toast" id="toast" role="status"></div>
+<script>
+const moods={
+ morning:{title:"Лёгкое утро",sub:"Мягкий старт · настроение",quote:"«Не обязательно спешить, чтобы двигаться вперёд.»",label:"МЕДЛЕННОЕ УТРО"},
+ flow:{title:"В своём потоке",sub:"Фокус · движение · ритм",quote:"«Оставь лишнее за пределами этой минуты.»",label:"СВОЙ РИТМ"},
+ evening:{title:"Тёплый вечер",sub:"Выдохнуть · замедлиться",quote:"«Пусть сегодняшний день останется там, где ему место.»",label:"ВЕЧЕР БЕЗ СПЕШКИ"},
+ night:{title:"После полуночи",sub:"Ночь · город · мысли",quote:"«Некоторые вещи понятнее в тишине.»",label:"НОЧНАЯ ЧАСТОТА"}
+};
+const buttons=[...document.querySelectorAll(".mood")];let active="flow";let toastTimer;
+function showToast(message){const el=document.getElementById("toast");el.textContent=message;el.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove("show"),3000)}
+buttons.forEach(button=>button.addEventListener("click",()=>{active=button.dataset.mood;buttons.forEach(b=>b.setAttribute("aria-pressed",String(b===button)));const m=moods[active];document.getElementById("trackTitle").textContent=m.title;document.getElementById("trackSub").textContent="Настроение FM · подборка готовится";document.getElementById("quote").firstChild.textContent=m.quote;document.getElementById("quoteLabel").textContent=m.label;showToast("Настроение изменено. Музыкальные подборки подключим после настройки эфира.")}));
+document.getElementById("playBtn").addEventListener("click",()=>showToast("Это стартовая версия интерфейса. Настоящий аудиопоток подключим следующим этапом."));
+document.getElementById("aboutLink").addEventListener("click",e=>{e.preventDefault();showToast("Настроение FM — независимый проект о музыке и состояниях.")});
+document.getElementById("year").textContent=new Date().getFullYear();
+</script>
+</body>
+</html>
