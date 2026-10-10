@@ -167,6 +167,36 @@ body{padding-bottom:112px}
 @media(max-width:700px){.smart-moods{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}.smart-mood{padding:11px;column-gap:8px}.fp-extra{margin-top:17px}.fp-volume-row{margin-top:13px}.sleep-options{gap:6px}.sleep-options button{padding:8px 9px}}
 @media(max-height:850px){.fp-extra{margin-top:13px}.fp-volume-row{margin-top:11px}.fp-footer{margin-top:16px}}
 
+
+/* Personal radio, daily scenarios and listening preferences */
+.wave-lab{display:flex;flex-direction:column;gap:16px}
+.wave-lab-card{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:22px;padding:24px;border:1px solid #ffffff12;border-radius:19px;background:radial-gradient(ellipse at 0 0,#a94e4d16,transparent 55%),linear-gradient(135deg,#17171b,#111114)}
+.wave-lab-kicker{font-size:9px;letter-spacing:.2em;color:#f09b87;font-weight:750}
+.wave-lab-copy h3{font-size:22px;letter-spacing:-.05em;margin:10px 0 8px}
+.wave-lab-copy p{max-width:540px;color:#a39ca6;font-size:11px;line-height:1.7;margin:0}
+.wave-lab-actions{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:8px;max-width:360px}
+.wave-action{border:1px solid #ffffff17;background:#ffffff06;border-radius:11px;padding:11px 13px;color:#ddd4dc;font-size:10px;transition:.2s}
+.wave-action:hover,.wave-action.selected{border-color:#e28c7b80;background:#ff795e16;color:#ffc0ad}
+.wave-action-primary{background:#f2d6ca;color:#25181b;border-color:#f2d6ca;font-weight:750}
+.wave-action-primary:hover{background:#ffbda7;color:#25181b}
+.wave-preferences{grid-column:1/-1;border-top:1px solid #ffffff10;padding-top:14px;font-size:10px;color:#918a95;line-height:1.6}
+.scenario-head{margin-top:12px}
+.scenario-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.scenario-card{min-height:125px;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-end;text-align:left;padding:16px;border:1px solid #ffffff0c;border-radius:15px;background:radial-gradient(ellipse at 100% 0,#8e45451c,transparent 60%),#151518;transition:transform .2s,border-color .2s}
+.scenario-card:hover,.scenario-card.active{transform:translateY(-2px);border-color:#df928180;background-color:#1e191c}
+.scenario-card span{font-size:8px;letter-spacing:.15em;color:#e5a18e;margin-bottom:auto}
+.scenario-card b{font-size:14px;letter-spacing:-.035em;margin-top:17px}
+.scenario-card small{font-size:10px;line-height:1.5;color:#928b96;margin-top:6px}
+.wave-settings{display:flex;align-items:center;justify-content:space-between;gap:14px;border:1px solid #ffffff10;border-radius:14px;padding:15px 17px;background:#131316}
+.wave-settings b,.wave-settings small{display:block}.wave-settings b{font-size:11px}.wave-settings small{font-size:10px;color:#8f8993;margin-top:5px;line-height:1.5}
+.wave-toggle{border:1px solid #ffffff1a;background:#ffffff07;border-radius:99px;padding:9px 13px;font-size:10px;color:#ddd5dd;white-space:nowrap}
+.wave-toggle[aria-pressed=true]{background:#f2d6ca;color:#26191c;border-color:#f2d6ca}
+.sleep-fade-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:12px;padding-top:12px;border-top:1px solid #ffffff10;font-size:10px;color:#bdb4bf}
+.sleep-fade-row button{border:1px solid #ffffff18;background:#ffffff07;color:#bdb4bf;border-radius:99px;padding:7px 10px;font-size:9px}
+.sleep-fade-row button[aria-pressed=true]{background:#ff795e18;border-color:#ff795e80;color:#ffc0ad}
+@media(max-width:900px){.wave-lab-card{grid-template-columns:1fr;gap:15px}.wave-lab-actions{justify-content:flex-start;max-width:none}.scenario-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:700px){.wave-lab-card{padding:17px}.wave-lab-copy h3{font-size:20px}.wave-lab-actions{display:grid;grid-template-columns:1fr 1fr}.wave-action-primary{grid-column:1/-1}.scenario-grid{gap:8px}.scenario-card{min-height:118px;padding:12px}.scenario-card b{font-size:13px}.scenario-card small{font-size:9px}.wave-settings{padding:13px}.wave-settings small{max-width:225px}}
+
 </style>
 </head><body>
 <div class="app">
@@ -204,6 +234,30 @@ body{padding-bottom:112px}
  <button class="smart-mood" type="button" data-preset="surprise"><span>✦</span><b>Удиви меня</b><small>Случайное настроение</small></button>
 </div>
 </section>
+
+<section class="wave-lab" id="waveLab">
+ <div class="sectionhead"><h2>Моя волна</h2><span>ПОДСТРАИВАЕТСЯ ПОД ТЕБЯ</span></div>
+ <div class="wave-lab-card">
+  <div class="wave-lab-copy"><div class="wave-lab-kicker">ТВОЙ МУЗЫКАЛЬНЫЙ ВКУС</div><h3 id="waveTitle">Настроим эфир под тебя</h3><p id="waveDescription">Отмечай, что нравится. Настроение FM будет чаще предлагать близкие жанры и убирать те, что не подходят.</p></div>
+  <div class="wave-lab-actions">
+   <button type="button" id="waveLike" class="wave-action">♡ Нравится</button>
+   <button type="button" id="waveDislike" class="wave-action">↘ Не моё</button>
+   <button type="button" id="waveNext" class="wave-action wave-action-primary">Следующая станция ↗</button>
+  </div>
+  <div class="wave-preferences" id="wavePreferences">Пока без предпочтений — начни с текущей станции.</div>
+ </div>
+ <div class="sectionhead scenario-head"><h2>Сценарии на каждый день</h2><span>ОДНО НАЖАТИЕ</span></div>
+ <div class="scenario-grid">
+  <button type="button" class="scenario-card" data-scenario="coffee"><span>01 / УТРО</span><b>Кофе и тишина</b><small>Мягкий lounge и спокойный старт</small></button>
+  <button type="button" class="scenario-card" data-scenario="work"><span>02 / ФОКУС</span><b>Глубокая работа</b><small>Ambient, piano и минимум суеты</small></button>
+  <button type="button" class="scenario-card" data-scenario="drive"><span>03 / ДОРОГА</span><b>В путь</b><small>Ритм, который держит темп</small></button>
+  <button type="button" class="scenario-card" data-scenario="rain"><span>04 / ДОЖДЬ</span><b>Дождливый вечер</b><small>Джаз и тёплая меланхолия</small></button>
+  <button type="button" class="scenario-card" data-scenario="romance"><span>05 / ВДВОЁМ</span><b>Тёплый вечер</b><small>Романтичный lounge и piano</small></button>
+  <button type="button" class="scenario-card" data-scenario="sleep"><span>06 / НОЧЬ</span><b>Пора замедлиться</b><small>Ambient для спокойного фона</small></button>
+ </div>
+ <div class="wave-settings"><div><b>Экономия трафика</b><small>Показывать в каталоге станции до 128 kbps, если доступны.</small></div><button type="button" id="dataSaver" class="wave-toggle" aria-pressed="false">Выключена</button></div>
+</section>
+
 <section class="player-section" id="radioSection"><div class="sectionhead"><h2>Твоя радиоволна</h2><span id="heroGenre">СЕЙЧАС · CHILLOUT</span></div><div class="player">
 <div class="trackrow"><div class="cover" aria-hidden="true"><svg width="25" height="25" viewBox="0 0 24 24" fill="none"><path d="M9 18V5l11-2v13M9 18c0 1.1-1.3 2-3 2s-3-.9-3-2 1.3-2 3-2 3 .9 3 2Zm11-2c0 1.1-1.3 2-3 2s-3-.9-3-2 1.3-2 3-2 3 .9 3 2Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg></div><div class="trackmeta"><div class="tracktitle" id="trackTitle">Выбери радиостанцию</div><div class="tracksub" id="trackSub">Настоящий эфир · без синтезированных звуков</div></div><div class="wave" aria-hidden="true"><i style="--h:8px"></i><i style="--h:16px"></i><i style="--h:11px"></i><i style="--h:22px"></i><i style="--h:13px"></i><i style="--h:18px"></i><i style="--h:7px"></i></div></div>
 <div class="stationbox" id="stationBox"><div class="stationtop"><div><div class="stationheading">Радиостанции</div><div class="stationhint" id="stationHint">Загружаем каталог интернет-радио…</div></div><button class="refreshstations" id="refreshStations" type="button">Обновить список</button></div><div class="stationtools"><label class="stationsearch"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4 4" stroke-linecap="round"/></svg><input id="stationSearch" type="search" placeholder="Найти радиостанцию…" autocomplete="off" aria-label="Поиск радиостанций"></label><button id="favoritesOnly" class="filterchip" type="button" aria-pressed="false">♡ Избранное</button><button id="surpriseStation" class="filterchip surprise" type="button">✦ Удиви меня</button><button id="similarStations" class="filterchip" type="button">↗ Похожие</button></div><div class="stationlist" id="stationList"><div class="stationloading">Подключаем каталог Radio Browser…</div></div><audio id="streamAudio" preload="none"></audio></div>
@@ -239,6 +293,7 @@ body{padding-bottom:112px}
   <button type="button" data-sleep="15">15 мин</button><button type="button" data-sleep="30">30 мин</button><button type="button" data-sleep="45">45 мин</button><button type="button" data-sleep="60">1 час</button><button type="button" data-sleep="off" class="sleep-off">Выкл.</button>
  </div>
 </div>
+ <div class="sleep-fade-row"><span>Плавно уменьшить громкость перед остановкой</span><button type="button" id="sleepFadeToggle" aria-pressed="true">Включено</button></div>
 <div class="fp-volume-row"><label for="playerVolume">ГРОМКОСТЬ</label><input id="playerVolume" type="range" min="0" max="100" value="35" aria-label="Громкость радио"><span id="volumeValue">35%</span></div>
 
   <div class="fp-footer">ИНТЕРНЕТ-РАДИО · ЖИВОЙ ЭФИР</div>
@@ -620,4 +675,149 @@ document.getElementById("navHome").addEventListener("click",()=>window.scrollTo(
  document.getElementById("playBtn").addEventListener("click",()=>setTimeout(sync,50));
 })();
 </script>
+
+<script>
+/* Personalisation, presets, traffic preference, graceful sleep fade and media-session support. */
+(()=>{
+ const safeRead=(key,fallback)=>{try{const value=localStorage.getItem(key);return value===null?fallback:JSON.parse(value)}catch(e){return fallback}};
+ const safeWrite=(key,value)=>{try{localStorage.setItem(key,JSON.stringify(value))}catch(e){}};
+ const taste=safeRead("moodfm-taste",{liked:[],disliked:[]});
+ let liked=Array.isArray(taste.liked)?taste.liked:[],disliked=Array.isArray(taste.disliked)?taste.disliked:[];
+ const waveLike=document.getElementById("waveLike"),waveDislike=document.getElementById("waveDislike");
+ const waveTitle=document.getElementById("waveTitle"),waveDescription=document.getElementById("waveDescription"),wavePreferences=document.getElementById("wavePreferences");
+ const genreOf=station=>{const tags=(station?.tags||"").split(",").map(x=>x.trim().toLowerCase());return tags.find(x=>tagLabels[x])||currentTag||"chillout"};
+ function renderTaste(){
+  waveLike.classList.toggle("selected",!!currentStation&&liked.includes(currentStation.stationuuid));
+  waveDislike.classList.toggle("selected",!!currentStation&&disliked.includes(currentStation.stationuuid));
+  waveTitle.textContent=currentStation?(currentStation.name||"Текущая станция"):"Настроим эфир под тебя";
+  waveDescription.textContent=currentStation?"Оцени текущую станцию — предпочтения сохранятся на этом устройстве.":"Отмечай, что нравится. Станции будут подбираться с учётом твоих оценок.";
+  const preferred=[...new Set(liked.map(id=>recentStations.find(s=>s.stationuuid===id)).filter(Boolean).map(genreOf))];
+  const dislikedTags=[...new Set(disliked.map(id=>recentStations.find(s=>s.stationuuid===id)).filter(Boolean).map(genreOf))];
+  wavePreferences.textContent="Нравится: "+liked.length+" · Не моё: "+disliked.length+(preferred.length?" · Любимые жанры: "+preferred.map(x=>tagLabels[x]||x).join(", "):"")+(dislikedTags.length?" · Избегаем: "+dislikedTags.map(x=>tagLabels[x]||x).join(", "):"");
+ }
+ function rateStation(kind){
+  if(!currentStation){showToast("Сначала выбери станцию.");return}
+  const id=currentStation.stationuuid;
+  if(kind==="liked"){liked=liked.filter(x=>x!==id);disliked=disliked.filter(x=>x!==id);liked.push(id)}
+  else{disliked=disliked.filter(x=>x!==id);liked=liked.filter(x=>x!==id);disliked.push(id)}
+  liked=liked.slice(-80);disliked=disliked.slice(-80);safeWrite("moodfm-taste",{liked,disliked});
+  if(!recentStations.some(x=>x.stationuuid===id)){recentStations=[currentStation,...recentStations].slice(0,30);safeWrite("moodfm-history",recentStations)}
+  renderTaste();showToast(kind==="liked"?"Учтём: больше похожего звучания.":"Учтём: будем реже предлагать похожие станции.");
+ }
+ waveLike.addEventListener("click",()=>rateStation("liked"));
+ waveDislike.addEventListener("click",()=>rateStation("disliked"));
+ document.getElementById("waveNext").addEventListener("click",()=>{
+  if(!allStations.length){showToast("Сначала дождись загрузки каталога.");return}
+  const likedIds=new Set(liked),dislikedIds=new Set(disliked);
+  const currentIndex=allStations.findIndex(s=>s.stationuuid===currentStation?.stationuuid);
+  const ranked=allStations.map((station,i)=>({station,i,score:(likedIds.has(station.stationuuid)?-100:0)+(dislikedIds.has(station.stationuuid)?100:0)+(station.bitrate&&station.bitrate<=128&&dataSaver? -3:0)}))
+   .filter(x=>!dislikedIds.has(x.station.stationuuid)&&x.station.stationuuid!==currentStation?.stationuuid)
+   .sort((a,b)=>a.score-b.score||((a.i-currentIndex+allStations.length)%allStations.length)-((b.i-currentIndex+allStations.length)%allStations.length));
+  const next=ranked[0]?.station;
+  if(!next){showToast("В этом списке больше нет новых станций. Обнови каталог или выбери жанр.");return}
+  let item=[...document.querySelectorAll(".stationitem")].find(el=>el.dataset.uuid===next.stationuuid);
+  if(!item){favoritesMode=false;document.getElementById("stationSearch").value="";renderStations();item=[...document.querySelectorAll(".stationitem")].find(el=>el.dataset.uuid===next.stationuuid)}
+  if(item)item.querySelector(".stationplay")?.click();else playStation(next,{classList:{add(){},remove(){} }},{set textContent(v){}});
+ });
+ const presets={
+  coffee:{tags:["lounge","jazz","chillout"],title:"Кофе и тишина",desc:"Мягкое звучание для спокойного начала дня."},
+  work:{tags:["ambient","classical","piano"],title:"Глубокая работа",desc:"Ненавязчивый звук для концентрации."},
+  drive:{tags:["rock","electronic","reggae"],title:"В путь",desc:"Ритм для дороги — выбирай станцию и не отвлекайся за рулём."},
+  rain:{tags:["jazz","ambient","piano"],title:"Дождливый вечер",desc:"Тёплый звук для медленного вечера."},
+  romance:{tags:["lounge","piano","jazz"],title:"Тёплый вечер",desc:"Мягкий lounge, джаз и фортепиано."},
+  sleep:{tags:["ambient","classical","chillout"],title:"Пора замедлиться",desc:"Спокойный фон. Для выключения эфира включи таймер сна."}
+ };
+ document.querySelectorAll("[data-scenario]").forEach(button=>button.addEventListener("click",()=>{
+  const preset=presets[button.dataset.scenario];if(!preset)return;
+  document.querySelectorAll("[data-scenario]").forEach(b=>b.classList.toggle("active",b===button));
+  const tags=preset.tags.filter(tag=>!disliked.some(id=>{const st=recentStations.find(x=>x.stationuuid===id);return st&&genreOf(st)===tag}));
+  const choices=tags.length?tags:preset.tags;const tag=choices[Math.floor(Math.random()*choices.length)];
+  document.getElementById("momentTitle").textContent=preset.title;document.getElementById("momentStatus").textContent=preset.desc;
+  loadStations(tag);document.getElementById("radioSection").scrollIntoView({behavior:"smooth",block:"start"});
+ }));
+ let dataSaver=!!safeRead("moodfm-data-saver",false);
+ const dataButton=document.getElementById("dataSaver");
+ function syncDataButton(){dataButton.setAttribute("aria-pressed",String(dataSaver));dataButton.textContent=dataSaver?"Включена":"Выключена"}
+ syncDataButton();
+ dataButton.addEventListener("click",()=>{dataSaver=!dataSaver;safeWrite("moodfm-data-saver",dataSaver);syncDataButton();if(dataSaver){allStations=allStations.filter(s=>!s.bitrate||Number(s.bitrate)<=128);renderStations();showToast("Экономия трафика включена. Высокий битрейт скрыт, если известен.");}else{loadStations(currentTag);showToast("Экономия трафика выключена.")}});
+ // Remember volume and restore it when the page is opened again.
+ const volumeKey="moodfm-volume",storedVolume=safeRead(volumeKey,35);
+ if(Number.isFinite(Number(storedVolume))){streamAudio.volume=Math.max(0,Math.min(1,Number(storedVolume)/100));lastAudibleVolume=streamAudio.volume||.35}
+ streamAudio.addEventListener("volumechange",()=>safeWrite(volumeKey,Math.round(streamAudio.volume*100)));
+ // A gentle fade can be disabled in the sleep timer panel.
+ let fadeEnabled=safeRead("moodfm-sleep-fade",true),fadeButton=document.getElementById("sleepFadeToggle");
+ function syncFade(){fadeButton.setAttribute("aria-pressed",String(fadeEnabled));fadeButton.textContent=fadeEnabled?"Включено":"Выключено"}
+ syncFade();fadeButton.addEventListener("click",()=>{fadeEnabled=!fadeEnabled;safeWrite("moodfm-sleep-fade",fadeEnabled);syncFade()});
+ const originalStartSleepTimer=startSleepTimer;
+ startSleepTimer=function(minutes){
+  originalStartSleepTimer(minutes);
+  if(!minutes)return;
+  if(window.__moodFmFadeTimer)clearTimeout(window.__moodFmFadeTimer);
+  const fadeMs=20000,wait=Math.max(0,minutes*60000-fadeMs);
+  window.__moodFmFadeTimer=setTimeout(()=>{
+   if(!fadeEnabled||streamAudio.paused)return;
+   const start=streamAudio.volume,started=Date.now();
+   if(window.__moodFmFadeInterval)clearInterval(window.__moodFmFadeInterval);
+   window.__moodFmFadeInterval=setInterval(()=>{
+    const progress=Math.min(1,(Date.now()-started)/fadeMs);
+    streamAudio.volume=Math.max(0,start*(1-progress));
+    if(progress>=1){clearInterval(window.__moodFmFadeInterval);window.__moodFmFadeInterval=null}
+   },250);
+  },wait);
+ };
+ const originalStopSleepTimer=stopSleepTimer;
+ stopSleepTimer=function(showMessage=false){
+  if(window.__moodFmFadeTimer)clearTimeout(window.__moodFmFadeTimer);
+  if(window.__moodFmFadeInterval)clearInterval(window.__moodFmFadeInterval);
+  window.__moodFmFadeTimer=null;window.__moodFmFadeInterval=null;
+  originalStopSleepTimer(showMessage);
+ };
+ // Browser lock-screen / headset controls. Live-radio metadata depends on what the station exposes.
+ function updateMediaSession(){
+  if(!("mediaSession" in navigator)||!currentStation)return;
+  try{
+   navigator.mediaSession.metadata=new MediaMetadata({title:currentStation.name||"Интернет-радио",artist:tagLabels[currentTag]||"Настроение FM",album:"Настроение FM · Живой эфир"});
+   navigator.mediaSession.setActionHandler("play",()=>document.getElementById("playBtn").click());
+   navigator.mediaSession.setActionHandler("pause",()=>document.getElementById("playBtn").click());
+   navigator.mediaSession.setActionHandler("nexttrack",()=>document.getElementById("waveNext").click());
+   navigator.mediaSession.setActionHandler("previoustrack",()=>document.getElementById("fpPrev").click());
+   navigator.mediaSession.playbackState=streamAudio.paused?"paused":"playing";
+  }catch(e){}
+ }
+ streamAudio.addEventListener("playing",updateMediaSession);
+ streamAudio.addEventListener("pause",()=>{if("mediaSession" in navigator)try{navigator.mediaSession.playbackState="paused"}catch(e){}});
+ const trackObserver=new MutationObserver(updateMediaSession);
+ trackObserver.observe(document.getElementById("trackTitle"),{childList:true,subtree:true,characterData:true});
+ // Resume interrupted streams at most twice; do not loop indefinitely on a dead station.
+ let reconnectCount=0,reconnectTimer=null;
+ streamAudio.addEventListener("playing",()=>{reconnectCount=0;if(reconnectTimer)clearTimeout(reconnectTimer);reconnectTimer=null});
+ function scheduleReconnect(reason){
+  if(!currentStation||streamAudio.paused||reconnectCount>=2||reconnectTimer)return;
+  reconnectCount++;const delay=1800*reconnectCount;
+  document.getElementById("status").textContent=reason+" Повторное подключение…";
+  reconnectTimer=setTimeout(()=>{
+   reconnectTimer=null;
+   if(!currentStation||streamAudio.paused)return;
+   const station=currentStation;
+   const item=[...document.querySelectorAll(".stationitem")].find(el=>el.dataset.uuid===station.stationuuid)||{classList:{add(){},remove(){}}};
+   const btn=item.querySelector?.(".stationplay")||{set textContent(v){}};
+   playStation(station,item,btn);
+  },delay);
+ }
+ streamAudio.addEventListener("error",()=>scheduleReconnect("Радиопоток прервался."));
+ streamAudio.addEventListener("stalled",()=>scheduleReconnect("Поток временно завис."));
+ streamAudio.addEventListener("ended",()=>scheduleReconnect("Эфир завершился."));
+ // Apply data-saving filter to every newly loaded catalog without altering stream URLs.
+ const originalLoadStations=loadStations;
+ loadStations=async function(tag=currentTag){
+  await originalLoadStations(tag);
+  if(dataSaver&&allStations.length){allStations=allStations.filter(s=>!s.bitrate||Number(s.bitrate)<=128);renderStations();document.getElementById("stationHint").textContent="Экономия трафика · до 128 kbps, если битрейт известен"}
+ };
+ // Refresh personal controls when the selected station changes.
+ const originalPlayStation=playStation;
+ playStation=async function(station,item,btn,attempt=0){await originalPlayStation(station,item,btn,attempt);renderTaste();updateMediaSession()};
+ renderTaste();
+})();
+</script>
+
 </body></html>
