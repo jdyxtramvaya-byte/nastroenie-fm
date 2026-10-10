@@ -28,78 +28,72 @@ footer{display:flex;justify-content:space-between;align-items:center;gap:14px;bo
   <h1 class="headline">Останься<br>в своём<br><span>настроении.</span></h1>
   <p class="intro">Музыка для дороги, тихого вечера, больших мыслей и моментов, когда слова не нужны. Просто включи — и побудь здесь.</p>
   <div class="player" aria-label="Музыкальный плеер">
-    <div class="trackrow"><div class="cover" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M9 18V5l11-2v13M9 18c0 1.1-1.3 2-3 2s-3-.9-3-2 1.3-2 3-2 3 .9 3 2Zm11-2c0 1.1-1.3 2-3 2s-3-.9-3-2 1.3-2 3-2 3 .9 3 2Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg></div><div class="trackmeta"><div class="tracktitle" id="trackTitle">Атмосферный эфир</div><div class="tracksub" id="trackSub">Бесплатный звук · генерация в браузере</div></div><div class="wave" aria-hidden="true"><i style="--h:8px"></i><i style="--h:16px"></i><i style="--h:11px"></i><i style="--h:22px"></i><i style="--h:13px"></i><i style="--h:18px"></i><i style="--h:7px"></i></div></div>
+    <div class="trackrow"><div class="cover" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M9 18V5l11-2v13M9 18c0 1.1-1.3 2-3 2s-3-.9-3-2 1.3-2 3-2 3 .9 3 2Zm11-2c0 1.1-1.3 2-3 2s-3-.9-3-2 1.3-2 3-2 3 .9 3 2Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg></div><div class="trackmeta"><div class="tracktitle" id="trackTitle">Выбери радиостанцию</div><div class="tracksub" id="trackSub">Настоящий интернет-эфир · без синтезированных звуков</div></div><div class="wave" aria-hidden="true"><i style="--h:8px"></i><i style="--h:16px"></i><i style="--h:11px"></i><i style="--h:22px"></i><i style="--h:13px"></i><i style="--h:18px"></i><i style="--h:7px"></i></div></div>
     <div class="stationbox" id="stationBox">
-      <div class="stationtop"><div><div class="stationheading">Настоящий эфир</div><div class="stationhint" id="stationHint">Ищем бесплатные интернет-радиостанции…</div></div><button class="refreshstations" id="refreshStations" type="button">Обновить</button></div>
-      <div class="stationfilters" aria-label="Музыкальные направления">
-        <button class="filter active" data-tag="chillout">Chillout</button><button class="filter" data-tag="lounge">Lounge</button><button class="filter" data-tag="jazz">Jazz</button><button class="filter" data-tag="ambient">Ambient</button>
-      </div>
+      <div class="stationtop"><div><div class="stationheading">Станции выбранного жанра</div><div class="stationhint" id="stationHint">Загружаем каталог интернет-радио…</div></div><button class="refreshstations" id="refreshStations" type="button">Обновить</button></div>
       <div class="stationlist" id="stationList"><div class="stationloading">Подключаем каталог Radio Browser…</div></div>
       <audio id="streamAudio" preload="none"></audio>
     </div>
-    <div class="controls"><button class="play" id="playBtn" aria-label="Включить атмосферный эфир" title="Включить атмосферный эфир"><svg id="playIcon" width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l10-6.5z"/></svg></button><div class="status" id="status" aria-live="polite">Бесплатный атмосферный звук без внешнего сервера.<br>Нажми Play, чтобы включить.</div><label aria-label="Громкость"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M11 5 6 9H3v6h3l5 4zM15.5 8.5a5 5 0 0 1 0 7M18 5a9 9 0 0 1 0 14" stroke-linecap="round" stroke-linejoin="round"/></svg></label><input class="vol" id="volume" type="range" min="0" max="1" step=".01" value=".35" aria-label="Громкость"></div>
+    <div class="controls"><button class="play" id="playBtn" aria-label="Включить атмосферный эфир" title="Включить атмосферный эфир"><svg id="playIcon" width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l10-6.5z"/></svg></button><div class="status" id="status" aria-live="polite">Сначала выбери жанр и станцию.<br>Здесь играет только реальный радиопоток.</div><label aria-label="Громкость"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M11 5 6 9H3v6h3l5 4zM15.5 8.5a5 5 0 0 1 0 7M18 5a9 9 0 0 1 0 14" stroke-linecap="round" stroke-linejoin="round"/></svg></label><input class="vol" id="volume" type="range" min="0" max="1" step=".01" value=".35" aria-label="Громкость"></div>
   </div>
 </section>
 <section class="rightcol">
-  <div class="sectionhead"><h2>Выбери своё состояние</h2><span>01 — 04</span></div>
+  <div class="sectionhead"><h2>Радио по жанрам</h2><span>ВЫБЕРИ СВОЁ</span></div>
   <div class="moods">
-    <button class="mood" data-mood="morning" aria-pressed="false"><span class="moodicon">↗</span><span class="moodname">Лёгкое утро</span><div class="mooddesc">Начать без спешки</div></button>
-    <button class="mood" data-mood="flow" aria-pressed="true"><span class="moodicon">〰</span><span class="moodname">В своём потоке</span><div class="mooddesc">Сосредоточиться на своём</div></button>
-    <button class="mood" data-mood="evening" aria-pressed="false"><span class="moodicon">☼</span><span class="moodname">Тёплый вечер</span><div class="mooddesc">Отпустить суету</div></button>
-    <button class="mood" data-mood="night" aria-pressed="false"><span class="moodicon">☾</span><span class="moodname">После полуночи</span><div class="mooddesc">Музыка для тишины</div></button>
+    <button class="mood" data-tag="chillout" aria-pressed="true"><span class="moodicon">〰</span><span class="moodname">Chillout</span><div class="mooddesc">Мягкая музыка и отдых</div></button>
+    <button class="mood" data-tag="lounge" aria-pressed="false"><span class="moodicon">◌</span><span class="moodname">Lounge</span><div class="mooddesc">Атмосфера лаунж-бара</div></button>
+    <button class="mood" data-tag="jazz" aria-pressed="false"><span class="moodicon">♫</span><span class="moodname">Jazz</span><div class="mooddesc">Живые инструменты и импровизация</div></button>
+    <button class="mood" data-tag="ambient" aria-pressed="false"><span class="moodicon">☾</span><span class="moodname">Ambient</span><div class="mooddesc">Пространный звук для фокуса</div></button>
   </div>
-  <div class="quote" id="quote">«Иногда достаточно одной песни, чтобы день стал другим.»<small id="quoteLabel">Твоя частота</small></div>
+  <div class="quote" id="quote">«Выбери жанр, найди станцию и включи настоящий эфир.»<small id="quoteLabel">ТВОЯ ЧАСТОТА</small></div>
 </section>
 </main>
 <footer><span>© <span id="year"></span> НАСТРОЕНИЕ FM · Первая версия</span><div class="footerlinks"><a href="#" id="aboutLink">О проекте</a><a href="https://github.com/jdyxtramvaya-byte/nastroenie-fm">GitHub</a></div></footer>
 </div>
 <div class="toast" id="toast" role="status"></div>
 <script>
-const moods={
- morning:{title:"Лёгкое утро",sub:"Светлый синтезаторный эмбиент",notes:[261.63,329.63,392,493.88,523.25],quote:"«Не обязательно спешить, чтобы двигаться вперёд.»",label:"МЕДЛЕННОЕ УТРО"},
- flow:{title:"В своём потоке",sub:"Мягкий ритм · фокус",notes:[220,261.63,329.63,392,440],quote:"«Оставь лишнее за пределами этой минуты.»",label:"СВОЙ РИТМ"},
- evening:{title:"Тёплый вечер",sub:"Тёплый, медленный эмбиент",notes:[196,246.94,293.66,369.99,392],quote:"«Пусть сегодняшний день останется там, где ему место.»",label:"ВЕЧЕР БЕЗ СПЕШКИ"},
- night:{title:"После полуночи",sub:"Глубокие ночные тона",notes:[164.81,196,246.94,293.66,329.63],quote:"«Некоторые вещи понятнее в тишине.»",label:"НОЧНАЯ ЧАСТОТА"}
-};
-const buttons=[...document.querySelectorAll(".mood")];let active="flow";let toastTimer;let audioCtx=null;let master=null;let playing=false;let sequenceTimer=null;let noteIndex=0;let activeVoices=[];
-function showToast(message){const el=document.getElementById("toast");el.textContent=message;el.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove("show"),3000)}
-function makeTone(freq,when,duration,volume){
-  if(!audioCtx||!master)return;
-  const osc=audioCtx.createOscillator();const gain=audioCtx.createGain();const filter=audioCtx.createBiquadFilter();
-  osc.type="sine";osc.frequency.setValueAtTime(freq,when);
-  filter.type="lowpass";filter.frequency.setValueAtTime(900,when);
-  gain.gain.setValueAtTime(0.0001,when);gain.gain.exponentialRampToValueAtTime(volume,when+0.8);gain.gain.setValueAtTime(volume,when+duration-1.2);gain.gain.exponentialRampToValueAtTime(0.0001,when+duration);
-  osc.connect(filter);filter.connect(gain);gain.connect(master);osc.start(when);osc.stop(when+duration+0.05);
-}
-function playPhrase(){
-  if(!playing||!audioCtx)return;
-  const m=moods[active];const now=audioCtx.currentTime;const notes=m.notes;
-  makeTone(notes[noteIndex%notes.length],now,4.2,0.12);
-  if(noteIndex%3===0)makeTone(notes[(noteIndex+2)%notes.length]/2,now,5.5,0.08);
-  if(noteIndex%4===0)makeTone(notes[(noteIndex+3)%notes.length]*2,now+0.15,3.6,0.025);
-  noteIndex++;
-}
-function startSound(){
-  const AudioContextClass=window.AudioContext||window.webkitAudioContext;
-  if(!AudioContextClass){showToast("Этот браузер не поддерживает генерацию звука.");return}
-  if(!audioCtx){audioCtx=new AudioContextClass();master=audioCtx.createGain();master.gain.value=Number(document.getElementById("volume").value);master.connect(audioCtx.destination)}
-  audioCtx.resume().then(()=>{if(playing)return;playing=true;noteIndex=0;playPhrase();sequenceTimer=setInterval(playPhrase,3200);document.getElementById("trackTitle").textContent=moods[active].title;document.getElementById("trackSub").textContent="Атмосферный звук · создаётся на устройстве";document.getElementById("status").innerHTML="Эфир включён · бесплатная генерация звука<br>Без внешнего сервера и музыкальных файлов";document.getElementById("playIcon").innerHTML='<path d="M7 5h4v14H7zM15 5h4v14h-4z"/>';document.getElementById("playBtn").setAttribute("aria-label","Остановить эфир");document.getElementById("playBtn").title="Остановить эфир"});
-}
-function stopSound(){playing=false;clearInterval(sequenceTimer);sequenceTimer=null;if(audioCtx)audioCtx.suspend();document.getElementById("status").innerHTML="Эфир остановлен.<br>Нажми Play, чтобы продолжить.";document.getElementById("playIcon").innerHTML='<path d="M8 5.5v13l10-6.5z"/>';document.getElementById("playBtn").setAttribute("aria-label","Включить атмосферный эфир");document.getElementById("playBtn").title="Включить атмосферный эфир"}
-buttons.forEach(button=>button.addEventListener("click",()=>{active=button.dataset.mood;buttons.forEach(b=>b.setAttribute("aria-pressed",String(b===button)));const m=moods[active];document.getElementById("trackTitle").textContent=m.title;document.getElementById("trackSub").textContent=m.sub;document.getElementById("quote").firstChild.textContent=m.quote;document.getElementById("quoteLabel").textContent=m.label;if(playing){noteIndex=0;playPhrase()}showToast("Настроение переключено: "+m.title)}));
-document.getElementById("playBtn").addEventListener("click",()=>playing?stopSound():startSound());
-
-const streamAudio=document.getElementById("streamAudio");let currentStation=null;let currentTag="chillout";let streamPlaying=false;let loadToken=0;
+const streamAudio=document.getElementById("streamAudio");
+let currentStation=null;
+let currentTag="chillout";
+let streamPlaying=false;
+let loadToken=0;
+let toastTimer;
 const tagLabels={chillout:"Chillout",lounge:"Lounge",jazz:"Jazz",ambient:"Ambient"};
+const genreButtons=[...document.querySelectorAll(".mood[data-tag]")];
+function showToast(message){const el=document.getElementById("toast");el.textContent=message;el.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove("show"),3000)}
+function setPlayIcon(isPlaying){
+ document.getElementById("playIcon").innerHTML=isPlaying?'<path d="M7 5h4v14H7zM15 5h4v14h-4z"/>':'<path d="M8 5.5v13l10-6.5z"/>';
+ document.getElementById("playBtn").setAttribute("aria-label",isPlaying?"Поставить радио на паузу":"Включить радио");
+ document.getElementById("playBtn").title=isPlaying?"Поставить радио на паузу":"Включить радио";
+}
+function stopStream(){
+ streamAudio.pause();
+ streamPlaying=false;
+ setPlayIcon(false);
+}
 async function loadStations(tag=currentTag){
- currentTag=tag;const token=++loadToken;const list=document.getElementById("stationList");document.getElementById("stationHint").textContent="Бесплатный каталог Radio Browser · "+tagLabels[tag];
- list.innerHTML='<div class="stationloading">Загружаем станции…</div>';
- document.querySelectorAll(".filter").forEach(b=>b.classList.toggle("active",b.dataset.tag===tag));
+ currentTag=tag;
+ const token=++loadToken;
+ const list=document.getElementById("stationList");
+ document.getElementById("stationHint").textContent="Каталог интернет-радио · "+tagLabels[tag];
+ list.innerHTML='<div class="stationloading">Ищем работающие станции…</div>';
+ genreButtons.forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.tag===tag)));
  const hosts=["https://de1.api.radio-browser.info","https://nl1.api.radio-browser.info","https://all.api.radio-browser.info"];
  let data=null;
- for(const host of hosts){try{const response=await fetch(host+"/json/stations/search?"+new URLSearchParams({tag,hidebroken:"true",is_https:"true",order:"clickcount",reverse:"true",limit:"8"}),{signal:AbortSignal.timeout(9000)});if(!response.ok)continue;const result=await response.json();if(Array.isArray(result)&&result.length){data=result;break}}catch(e){}}
+ for(const host of hosts){
+  try{
+   const response=await fetch(host+"/json/stations/search?"+new URLSearchParams({tag,hidebroken:"true",is_https:"true",order:"clickcount",reverse:"true",limit:"10"}),{signal:AbortSignal.timeout(9000)});
+   if(!response.ok)continue;
+   const result=await response.json();
+   if(Array.isArray(result)&&result.length){data=result;break}
+  }catch(e){}
+ }
  if(token!==loadToken)return;
- if(!data){list.innerHTML='<div class="stationempty">Каталог сейчас не отвечает. Попробуй «Обновить» или выбери другой жанр. Атмосферный режим Play продолжает работать отдельно.</div>';document.getElementById("stationHint").textContent="Не удалось связаться с каталогом";return}
+ if(!data){
+  list.innerHTML='<div class="stationempty">Не удалось загрузить станции этого жанра. Нажми «Обновить» или выбери другой жанр.</div>';
+  document.getElementById("stationHint").textContent="Каталог временно недоступен";
+  return;
+ }
  list.innerHTML="";
  data.forEach(station=>{
   const item=document.createElement("div");item.className="stationitem";item.dataset.uuid=station.stationuuid;
@@ -107,37 +101,57 @@ async function loadStations(tag=currentTag){
   const meta=document.createElement("div");meta.className="stationmeta";meta.textContent=[station.country,station.codec,station.bitrate?station.bitrate+" kbps":""].filter(Boolean).join(" · ")||"Интернет-радио";
   const info=document.createElement("div");info.className="stationinfo";info.append(name,meta);
   const mark=document.createElement("div");mark.className="stationmark";mark.textContent="♫";
-  const btn=document.createElement("button");btn.className="stationplay";btn.type="button";btn.textContent="Слушать";
+  const btn=document.createElement("button");btn.className="stationplay";btn.type="button";btn.textContent=currentStation&&currentStation.stationuuid===station.stationuuid&&streamPlaying?"Играет":"Слушать";
+  if(currentStation&&currentStation.stationuuid===station.stationuuid&&streamPlaying)item.classList.add("playing");
   btn.addEventListener("click",()=>playStation(station,item,btn));
   item.append(mark,info,btn);list.append(item);
  });
- document.getElementById("stationHint").textContent="Найдено станций: "+data.length+" · выбери эфир";
+ document.getElementById("stationHint").textContent="Найдено станций: "+data.length+" · нажми «Слушать»";
 }
 async function playStation(station,item,btn){
- stopSound();currentStation=station;streamAudio.pause();streamPlaying=false;
+ stopStream();
+ currentStation=station;
  document.querySelectorAll(".stationitem").forEach(el=>el.classList.remove("playing"));
  document.querySelectorAll(".stationplay").forEach(el=>el.textContent="Слушать");
  item.classList.add("playing");btn.textContent="Запуск…";
  document.getElementById("trackTitle").textContent=station.name||"Интернет-радио";
- document.getElementById("trackSub").textContent=[station.country,station.codec,station.bitrate?station.bitrate+" kbps":""].filter(Boolean).join(" · ")||"Прямой аудиопоток";
- document.getElementById("status").textContent="Подключаемся к станции…";
+ document.getElementById("trackSub").textContent=[tagLabels[currentTag],station.country,station.codec,station.bitrate?station.bitrate+" kbps":""].filter(Boolean).join(" · ");
+ document.getElementById("status").textContent="Подключаемся к реальному радиопотоку…";
  try{
   let stream=station.url_resolved||station.url;
-  try{const host="https://de1.api.radio-browser.info";const res=await fetch(host+"/json/url/"+encodeURIComponent(station.stationuuid),{signal:AbortSignal.timeout(5000)});if(res.ok){const info=await res.json();if(info&&info.url)stream=info.url}}catch(e){}
-  streamAudio.src=stream;await streamAudio.play();streamPlaying=true;btn.textContent="Играет";document.getElementById("status").textContent="Сейчас в эфире · "+(station.name||"Интернет-радио");document.getElementById("playIcon").innerHTML='<path d="M7 5h4v14H7zM15 5h4v14h-4z"/>';document.getElementById("playBtn").setAttribute("aria-label","Остановить интернет-радио");document.getElementById("playBtn").title="Остановить интернет-радио";
- }catch(e){streamPlaying=false;btn.textContent="Повторить";document.getElementById("status").textContent="Не удалось запустить этот поток. Попробуй другую станцию.";showToast("Станция не отвечает или заблокировала воспроизведение. Выбери другую.");}
+  try{
+   const res=await fetch("https://de1.api.radio-browser.info/json/url/"+encodeURIComponent(station.stationuuid),{signal:AbortSignal.timeout(5000)});
+   if(res.ok){const info=await res.json();if(info&&info.url)stream=info.url}
+  }catch(e){}
+  if(!stream)throw new Error("No stream URL");
+  streamAudio.pause();streamAudio.src=stream;streamAudio.volume=Number(document.getElementById("volume").value);
+  await streamAudio.play();
+  streamPlaying=true;btn.textContent="Играет";
+  document.getElementById("status").textContent="В эфире · "+(station.name||"Интернет-радио");
+  setPlayIcon(true);
+ }catch(e){
+  streamPlaying=false;btn.textContent="Повторить";item.classList.remove("playing");
+  document.getElementById("status").textContent="Не удалось запустить поток. Попробуй другую станцию.";
+  setPlayIcon(false);showToast("Этот поток недоступен. Выбери другую станцию.");
+ }
 }
-streamAudio.addEventListener("playing",()=>{streamPlaying=true});
-streamAudio.addEventListener("pause",()=>{streamPlaying=false});
-document.querySelectorAll(".filter").forEach(b=>b.addEventListener("click",()=>loadStations(b.dataset.tag)));
+streamAudio.addEventListener("playing",()=>{streamPlaying=true;setPlayIcon(true)});
+streamAudio.addEventListener("pause",()=>{streamPlaying=false;setPlayIcon(false)});
+streamAudio.addEventListener("error",()=>{streamPlaying=false;setPlayIcon(false);if(currentStation)document.getElementById("status").textContent="Поток прервался. Попробуй другую станцию."});
+genreButtons.forEach(button=>button.addEventListener("click",()=>{
+ if(currentTag!==button.dataset.tag||!document.getElementById("stationList").querySelector(".stationitem"))loadStations(button.dataset.tag);
+ else{currentTag=button.dataset.tag;genreButtons.forEach(b=>b.setAttribute("aria-pressed",String(b===button)))}
+}));
 document.getElementById("refreshStations").addEventListener("click",()=>loadStations(currentTag));
-const originalPlayHandler=()=>{if(currentStation){if(streamPlaying){streamAudio.pause();document.getElementById("status").textContent="Интернет-радио на паузе.";document.getElementById("playIcon").innerHTML='<path d="M8 5.5v13l10-6.5z"/>';}else{streamAudio.play().then(()=>{document.getElementById("status").textContent="Сейчас в эфире · "+(currentStation.name||"Интернет-радио");document.getElementById("playIcon").innerHTML='<path d="M7 5h4v14H7zM15 5h4v14h-4z"/>'}).catch(()=>showToast("Не удалось возобновить поток."));}}else{playing?stopSound():startSound()}};
-document.getElementById("playBtn").addEventListener("click",originalPlayHandler);
-loadStations("chillout");
-
-document.getElementById("volume").addEventListener("input",e=>{if(master)master.gain.setTargetAtTime(Number(e.target.value),audioCtx.currentTime,0.05)});
-document.getElementById("aboutLink").addEventListener("click",e=>{e.preventDefault();showToast("Настроение FM — независимый проект. Сейчас играет синтезированный эмбиент; лицензированную музыку подключим отдельно.")});
+document.getElementById("playBtn").addEventListener("click",()=>{
+ if(!currentStation){showToast("Сначала выбери радиостанцию в списке.");return}
+ if(streamPlaying){streamAudio.pause();document.getElementById("status").textContent="Радио на паузе."}
+ else{streamAudio.play().then(()=>{streamPlaying=true;document.getElementById("status").textContent="В эфире · "+(currentStation.name||"Интернет-радио");setPlayIcon(true)}).catch(()=>showToast("Не удалось возобновить поток."))}
+});
+document.getElementById("volume").addEventListener("input",e=>{streamAudio.volume=Number(e.target.value)});
+document.getElementById("aboutLink").addEventListener("click",e=>{e.preventDefault();showToast("Настроение FM — подборка независимых интернет-радиостанций по жанрам.")});
 document.getElementById("year").textContent=new Date().getFullYear();
+loadStations("chillout");
 </script>
 </body>
 </html>
