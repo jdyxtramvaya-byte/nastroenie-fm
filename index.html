@@ -133,6 +133,9 @@ body{padding-bottom:112px}
 .stationitem.playing .stationplay:after{content:"Ⅱ"}
 .mute-button{border:1px solid #ffffff18;background:#ffffff08;color:#ddd5db;border-radius:50%;display:grid;place-items:center}
 @media(max-width:700px){.stationtools{gap:7px}.stationsearch{flex-basis:100%;height:43px}.filterchip{flex:1;padding:0 9px;font-size:9px}.station-fav{width:26px}.stationitem{gap:8px}}
+
+.moods{grid-template-columns:repeat(4,minmax(0,1fr))}.mood:nth-child(5){--art:radial-gradient(ellipse at 72% 20%,#df9f85,transparent 32%),linear-gradient(145deg,#57382f,#171619)}.mood:nth-child(6){--art:radial-gradient(ellipse at 72% 20%,#d7c39b,transparent 32%),linear-gradient(145deg,#554a36,#171619)}.mood:nth-child(7){--art:radial-gradient(ellipse at 72% 20%,#9f9be0,transparent 32%),linear-gradient(145deg,#34314f,#171619)}.mood:nth-child(8){--art:radial-gradient(ellipse at 72% 20%,#86c8d0,transparent 32%),linear-gradient(145deg,#244b54,#171619)}.mood:nth-child(9){--art:radial-gradient(ellipse at 72% 20%,#a7c58b,transparent 32%),linear-gradient(145deg,#2d4d36,#171619)}.mood:nth-child(10){--art:radial-gradient(ellipse at 72% 20%,#e0b06c,transparent 32%),linear-gradient(145deg,#5b3d25,#171619)}.mood:nth-child(11){--art:radial-gradient(ellipse at 72% 20%,#e38b7d,transparent 32%),linear-gradient(145deg,#592c32,#171619)}.mood:nth-child(12){--art:radial-gradient(ellipse at 72% 20%,#7ab7a8,transparent 32%),linear-gradient(145deg,#244a46,#171619)}
+@media(max-width:1000px){.moods{grid-template-columns:repeat(3,minmax(0,1fr))}}@media(max-width:700px){.moods{grid-template-columns:repeat(2,minmax(0,1fr))}
 </style>
 </head><body>
 <div class="app">
@@ -145,15 +148,23 @@ body{padding-bottom:112px}
 <header class="topbar"><div class="crumb">НАСТРОЕНИЕ <span style="color:#514b54">/</span> <b>РАДИО ПО ЖАНРАМ</b></div><div class="topright"><div class="live"><span class="dot"></span><span>ЭФИР ДОСТУПЕН</span></div><div class="profile">FM</div></div></header>
 <main>
 <section class="hero"><div class="hero-art"></div><div class="hero-content"><div class="eyebrow">ЗВУК, КОТОРЫЙ ТЕБЕ БЛИЗОК</div><h1 class="headline">Поймай<br>своё <span>настроение.</span></h1><p class="intro">Музыка не должна быть случайной. Выбери атмосферу, включи любимую волну и оставь остальное за кадром.</p><button class="hero-pill" type="button" id="heroChoose"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l10-6.5z"/></svg>Слушать радио</button></div></section>
-<section id="genresSection"><div class="sectionhead"><h2>Выбери атмосферу</h2><span>04 НАСТРОЕНИЯ</span></div><div class="moods">
+<section id="genresSection"><div class="sectionhead"><h2>Выбери атмосферу</h2><span>12 НАСТРОЕНИЙ</span></div><div class="moods">
 <button class="mood" data-tag="chillout" aria-pressed="true"><span class="moodicon">〰</span><span class="moodname">Chillout</span><div class="mooddesc">Замедлиться и выдохнуть</div></button>
 <button class="mood" data-tag="lounge" aria-pressed="false"><span class="moodicon">◌</span><span class="moodname">Lounge</span><div class="mooddesc">Мягкий ритм и стиль</div></button>
 <button class="mood" data-tag="jazz" aria-pressed="false"><span class="moodicon">♫</span><span class="moodname">Jazz</span><div class="mooddesc">Живой звук и импровизация</div></button>
 <button class="mood" data-tag="ambient" aria-pressed="false"><span class="moodicon">☾</span><span class="moodname">Ambient</span><div class="mooddesc">Пространство для мыслей</div></button>
+<button class="mood" data-tag="deep house" aria-pressed="false"><span class="moodicon">⌁</span><span class="moodname">Deep House</span><div class="mooddesc">Ритм без суеты</div></button>
+<button class="mood" data-tag="classical" aria-pressed="false"><span class="moodicon">♬</span><span class="moodname">Classical</span><div class="mooddesc">Классика и оркестры</div></button>
+<button class="mood" data-tag="piano" aria-pressed="false"><span class="moodicon">▤</span><span class="moodname">Piano</span><div class="mooddesc">Фортепиано и тишина</div></button>
+<button class="mood" data-tag="electronic" aria-pressed="false"><span class="moodicon">⌘</span><span class="moodname">Electronic</span><div class="mooddesc">Электронные текстуры</div></button>
+<button class="mood" data-tag="reggae" aria-pressed="false"><span class="moodicon">☼</span><span class="moodname">Reggae</span><div class="mooddesc">Тёплый расслабленный грув</div></button>
+<button class="mood" data-tag="rock" aria-pressed="false"><span class="moodicon">↯</span><span class="moodname">Rock</span><div class="mooddesc">Гитары и энергия</div></button>
+<button class="mood" data-tag="pop" aria-pressed="false"><span class="moodicon">✳</span><span class="moodname">Pop</span><div class="mooddesc">Знакомые мелодии</div></button>
+<button class="mood" data-tag="world" aria-pressed="false"><span class="moodicon">◎</span><span class="moodname">World</span><div class="mooddesc">Звуки разных культур</div></button>
 </div></section>
 <section class="player-section" id="radioSection"><div class="sectionhead"><h2>Твоя радиоволна</h2><span id="heroGenre">СЕЙЧАС · CHILLOUT</span></div><div class="player">
 <div class="trackrow"><div class="cover" aria-hidden="true"><svg width="25" height="25" viewBox="0 0 24 24" fill="none"><path d="M9 18V5l11-2v13M9 18c0 1.1-1.3 2-3 2s-3-.9-3-2 1.3-2 3-2 3 .9 3 2Zm11-2c0 1.1-1.3 2-3 2s-3-.9-3-2 1.3-2 3-2 3 .9 3 2Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg></div><div class="trackmeta"><div class="tracktitle" id="trackTitle">Выбери радиостанцию</div><div class="tracksub" id="trackSub">Настоящий эфир · без синтезированных звуков</div></div><div class="wave" aria-hidden="true"><i style="--h:8px"></i><i style="--h:16px"></i><i style="--h:11px"></i><i style="--h:22px"></i><i style="--h:13px"></i><i style="--h:18px"></i><i style="--h:7px"></i></div></div>
-<div class="stationbox" id="stationBox"><div class="stationtop"><div><div class="stationheading">Радиостанции</div><div class="stationhint" id="stationHint">Загружаем каталог интернет-радио…</div></div><button class="refreshstations" id="refreshStations" type="button">Обновить список</button></div><div class="stationtools"><label class="stationsearch"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4 4" stroke-linecap="round"/></svg><input id="stationSearch" type="search" placeholder="Найти радиостанцию…" autocomplete="off" aria-label="Поиск радиостанций"></label><button id="favoritesOnly" class="filterchip" type="button" aria-pressed="false">♡ Избранное</button><button id="surpriseStation" class="filterchip surprise" type="button">✦ Удиви меня</button></div><div class="stationlist" id="stationList"><div class="stationloading">Подключаем каталог Radio Browser…</div></div><audio id="streamAudio" preload="none"></audio></div>
+<div class="stationbox" id="stationBox"><div class="stationtop"><div><div class="stationheading">Радиостанции</div><div class="stationhint" id="stationHint">Загружаем каталог интернет-радио…</div></div><button class="refreshstations" id="refreshStations" type="button">Обновить список</button></div><div class="stationtools"><label class="stationsearch"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4 4" stroke-linecap="round"/></svg><input id="stationSearch" type="search" placeholder="Найти радиостанцию…" autocomplete="off" aria-label="Поиск радиостанций"></label><button id="favoritesOnly" class="filterchip" type="button" aria-pressed="false">♡ Избранное</button><button id="surpriseStation" class="filterchip surprise" type="button">✦ Удиви меня</button><button id="similarStations" class="filterchip" type="button">↗ Похожие</button></div><div class="stationlist" id="stationList"><div class="stationloading">Подключаем каталог Radio Browser…</div></div><audio id="streamAudio" preload="none"></audio></div>
 <div class="controls"><button class="play" id="playBtn" aria-label="Включить радио" title="Включить радио"><svg id="playIcon" width="21" height="21" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l10-6.5z"/></svg></button><div class="status" id="status" aria-live="polite">Сначала выбери жанр и станцию.<br>Здесь играет только реальный радиопоток.</div><button class="mute-button" id="muteBtn" type="button" aria-label="Выключить звук" title="Выключить звук"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4zM15 9l5 6M20 9l-5 6"/></svg></button></div>
 </div></section>
 </main>
@@ -189,7 +200,7 @@ let currentTag="chillout";
 let streamPlaying=false;
 let loadToken=0;
 let toastTimer;
-const tagLabels={chillout:"Chillout",lounge:"Lounge",jazz:"Jazz",ambient:"Ambient"};
+const tagLabels={"chillout":"Chillout","lounge":"Lounge","jazz":"Jazz","ambient":"Ambient","deep house":"Deep House","classical":"Classical","piano":"Piano","electronic":"Electronic","reggae":"Reggae","rock":"Rock","pop":"Pop","world":"World"};
 const favorites=new Set(JSON.parse(localStorage.getItem("moodfm-favorites")||"[]"));
 let allStations=[];let favoritesMode=false;let lastAudibleVolume=.35;
 const genreButtons=[...document.querySelectorAll(".mood[data-tag]")];
@@ -216,7 +227,7 @@ async function loadStations(tag=currentTag){
  let data=null;
  for(const host of hosts){
   try{
-   const response=await fetch(host+"/json/stations/search?"+new URLSearchParams({tag,hidebroken:"true",is_https:"true",order:"clickcount",reverse:"true",limit:"18"}),{signal:AbortSignal.timeout(9000)});
+   const response=await fetch(host+"/json/stations/search?"+new URLSearchParams({tag,hidebroken:"true",is_https:"true",order:"clickcount",reverse:"true",limit:"24"}),{signal:AbortSignal.timeout(9000)});
    if(!response.ok)continue;
    const result=await response.json();
    if(Array.isArray(result)&&result.length){data=result;break}
